@@ -1,17 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Book, UpdateBook } from 'types/bookTypes'
 import { UpdateUserData } from 'types/userTypes'
 import { RootState } from '../app/store'
 
 type stateType = {
-  editedUser: UpdateUserData
+  editedBook: UpdateBook
+  detailBook: Book
 }
 
 const initialState: stateType = {
-  editedUser: {
+  editedBook: {
     id: 0,
-    name: '',
-    introduction: '',
-    image: '',
+    body: '',
+    title: '',
+  },
+  detailBook: {
+    id: 0,
+    title: '',
+    body: '',
+    user_id: 0,
+    createdAt: '',
+    comments: [],
+    favorites: [],
   },
 }
 
@@ -20,12 +30,27 @@ export const bookSlice = createSlice({
   initialState,
 
   reducers: {
-    setEditedUser: (state, action: PayloadAction<UpdateUserData>) => {
-      state.editedUser = action.payload
+    setEditedBook: (state, action: PayloadAction<UpdateBook>) => {
+      state.editedBook = action.payload
+    },
+    resetEditedBook: (state) => {
+      state.editedBook = initialState.editedBook
+    },
+    setDetailBook: (state, action: PayloadAction<Book>) => {
+      state.detailBook = action.payload
+    },
+    resetDetailBook: (state) => {
+      state.detailBook = initialState.detailBook
     },
   },
 })
 
-export const { setEditedUser } = bookSlice.actions
-export const editedUser = (state: RootState) => state.auth.editedUser
+export const {
+  setEditedBook,
+  resetEditedBook,
+  setDetailBook,
+  resetDetailBook,
+} = bookSlice.actions
+export const editedBook = (state: RootState) => state.book.editedBook
+export const detailBook = (state: RootState) => state.book.detailBook
 export default bookSlice.reducer

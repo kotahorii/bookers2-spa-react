@@ -3,7 +3,7 @@ export type Book = {
   title: string
   body: string
   user_id: number
-  created_at: string
+  createdAt: string
   comments: Comment[]
   favorites: Favorite[]
 }
