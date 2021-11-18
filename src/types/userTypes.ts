@@ -15,14 +15,14 @@ export type SignInData = {
 export type User = {
   id: number
   uid: string
-  provider: string
+  provider?: string
   email: string
   name: string
   image: {
     url: string
   }
   introduction: string
-  allowPasswordChange: boolean
+  allowPasswordChange?: boolean
   createdAt?: Date
   updatedAt?: Date
 }
@@ -33,6 +33,7 @@ export type UpdateUserData = {
   introduction?: string
   image?: string
 }
+
 export type UpdateUserFormData = FormData & {
   append(
     name: keyof UpdateUserData,
@@ -41,3 +42,7 @@ export type UpdateUserFormData = FormData & {
   ): any
 }
 
+export type SessionRes = {
+  status: number
+  current_user: User
+}
