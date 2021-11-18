@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Book, UpdateBook } from 'types/bookTypes'
-import { UpdateUserData } from 'types/userTypes'
 import { RootState } from '../app/store'
 
 type stateType = {

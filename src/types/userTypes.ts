@@ -7,6 +7,10 @@ export type SignUpData = {
   image: string
 }
 
+export type SignUpFormData = FormData & {
+  append(name: keyof SignUpData, value: String | Blob, fileName?: string): any
+}
+
 export type SignInData = {
   email: string
   password: string
