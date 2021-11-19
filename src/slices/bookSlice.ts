@@ -5,6 +5,7 @@ import { RootState } from '../app/store'
 type stateType = {
   editedBook: UpdateBook
   detailBook: Book
+  isOpenBookModal: boolean
 }
 
 const initialState: stateType = {
@@ -22,6 +23,7 @@ const initialState: stateType = {
     comments: [],
     favorites: [],
   },
+  isOpenBookModal: false,
 }
 
 export const bookSlice = createSlice({
@@ -41,15 +43,21 @@ export const bookSlice = createSlice({
     resetDetailBook: (state) => {
       state.detailBook = initialState.detailBook
     },
+    setIsOpenBookModal: (state, action: PayloadAction<boolean>) => {
+      state.isOpenBookModal = action.payload
+    },
   },
 })
 
 export const {
+  setIsOpenBookModal,
   setEditedBook,
   resetEditedBook,
   setDetailBook,
   resetDetailBook,
 } = bookSlice.actions
-export const editedBook = (state: RootState) => state.book.editedBook
-export const detailBook = (state: RootState) => state.book.detailBook
+export const selectIsOpenBookModal = (state: RootState) =>
+  state.book.isOpenBookModal
+export const selectEditedBook = (state: RootState) => state.book.editedBook
+export const selectDetailBook = (state: RootState) => state.book.detailBook
 export default bookSlice.reducer

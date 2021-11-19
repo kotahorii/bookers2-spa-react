@@ -42,3 +42,8 @@ export type Favorite = {
 export type CreateAndDestroyFavorite = {
   bookId: string
 }
+
+export type MenuType = {
+  name: string
+  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element
+}[]
