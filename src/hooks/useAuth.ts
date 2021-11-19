@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { selectAuthData, setAuthData } from 'features/authSlice'
+import { selectAuthData, setAuthData } from 'slices/authSlice'
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
 import { SignUpFormData } from 'types/userTypes'
 import { useMutationAuth } from './queries/useMutationAuth'
@@ -17,7 +17,7 @@ export const useAuth = () => {
   const closeDetailModal = useCallback(() => setIsOpenDetailModal(true), [])
 
   const [preview, setPreview] = useState('')
-  const { signInMutate, signUpMutate } = useMutationAuth()
+  const { signInMutate, signUpMutate, signOutMutate } = useMutationAuth()
 
   const changeAuthData = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -81,10 +81,13 @@ export const useAuth = () => {
     [isLogin, createFormData, signInMutate, signUpMutate, authData]
   )
 
+  const signOut = useCallback(() => signOutMutate.mutate(), [signOutMutate])
+
   return {
     isLogin,
     toggleIsLogin,
     authUser,
+    signOut,
     authData,
     changeAuthData,
     preview,

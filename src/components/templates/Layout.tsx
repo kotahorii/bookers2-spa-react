@@ -1,4 +1,4 @@
-import { Header } from 'components/organisms/Header'
+import { Header } from 'components/templates/Header'
 import { VFC, ReactNode } from 'react'
 
 type Props = {

@@ -1,6 +1,8 @@
+import { useAuth } from 'hooks/useAuth'
 import { Link } from 'react-router-dom'
 
 export const Header = () => {
+  const { signOut } = useAuth()
   return (
     <nav className=" flex flex-row justify-between items-center px-3 w-screen h-20 text-gray-50 bg-blue-400">
       <div></div>
@@ -18,7 +20,10 @@ export const Header = () => {
         >
           Users
         </Link>
-        <span className="text-lg hover:bg-blue-500 rounded-lg px-3 py-3">
+        <span
+          onClick={signOut}
+          className="text-lg hover:bg-blue-500 rounded-lg px-3 py-3 cursor-pointer"
+        >
           Sign out
         </span>
       </div>
