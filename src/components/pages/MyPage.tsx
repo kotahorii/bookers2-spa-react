@@ -1,9 +1,8 @@
+import { Layout } from 'components/templates/Layout'
 import React from 'react'
 
 export const MyPage = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <Layout>
+    
+  </Layout>
 }

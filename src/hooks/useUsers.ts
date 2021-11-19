@@ -1,4 +1,6 @@
+import { useQueryUsers } from './queries/useQueryUsers'
 
 export const useUsers = () => {
-  return 
+  const { data: users } = useQueryUsers()
+  return { users }
 }

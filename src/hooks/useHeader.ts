@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { ChangeEvent, useCallback } from 'react'
+import { useNavigate } from 'react-router'
 import {
   selectIsOpenEditUserModal,
   setAuthData,
@@ -9,6 +10,7 @@ import {
   selectEditedBook,
   selectIsOpenBookModal,
   setEditedBook,
+  setIsOpenBookModal,
 } from 'slices/bookSlice'
 import { useQueryUser } from './queries/useQueryCurrentUser'
 import { useAuth } from './useAuth'
@@ -20,6 +22,7 @@ export const useHeader = () => {
   const editedBook = useAppSelector(selectEditedBook)
   const isOpenBookModal = useAppSelector(selectIsOpenBookModal)
   const isOpenEditUserModal = useAppSelector(selectIsOpenEditUserModal)
+  const navigate = useNavigate()
 
   const changeBook = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +52,17 @@ export const useHeader = () => {
     dispatch(setIsOpenEditUserModal(false))
   }, [dispatch])
 
+  const openCreateBookModal = useCallback(() => {
+    dispatch(setIsOpenBookModal(true))
+  }, [dispatch])
+
+  const closeCreateBookModal = useCallback(() => {
+    dispatch(setIsOpenBookModal(false))
+  }, [dispatch])
+
+  const myPageNavigate = useCallback(() => {
+    navigate('/myPage')
+  }, [navigate])
 
   return {
     isOpenBookModal,
@@ -57,5 +71,8 @@ export const useHeader = () => {
     changeBook,
     openEditUserModal,
     closeEditedUserModal,
+    openCreateBookModal,
+    closeCreateBookModal,
+    myPageNavigate,
   }
 }

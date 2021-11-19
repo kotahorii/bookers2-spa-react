@@ -19,7 +19,7 @@ export const CustomButton: VFC<Props> = memo(
     return (
       <button
         type={type}
-        className={`${color} hover:${hoverColor} inline-flex justify-center px-3 py-2 text-sm font-medium border border-transparent rounded-full text-gray-50 hover:bg-blue-400 focus:outline-none`}
+        className={`${color} hover:${hoverColor} shadow-md inline-flex w-full max-w-xs justify-center px-3 py-2 text-sm font-medium border border-transparent rounded-full text-gray-50 hover:bg-blue-400 focus:outline-none`}
         onClick={onClick}
       >
         {text}

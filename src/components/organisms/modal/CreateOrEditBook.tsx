@@ -1,9 +1,27 @@
-import React from 'react'
+import { CustomButton } from 'components/atom/CustomButton'
+import { CustomInput } from 'components/atom/CustomInput'
+import { CustomLabel } from 'components/atom/CustomLabel'
+import { useHeader } from 'hooks/useHeader'
 
 export const CreateOrEditBook = () => {
+  const { changeBook, editedBook } = useHeader()
   return (
-    <div>
-      
-    </div>
+    <form className="mt-2 flex flex-col">
+      <CustomLabel title="Title:" />
+      <CustomInput
+        name="title"
+        value={editedBook.title}
+        placeholder="Name"
+        onChange={changeBook}
+      />
+      <CustomLabel title="Body:" />
+      <CustomInput
+        name="body"
+        value={editedBook.body}
+        placeholder="Body"
+        onChange={changeBook}
+      />
+      <CustomButton text="Create" />
+    </form>
   )
 }

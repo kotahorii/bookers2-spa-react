@@ -1,24 +1,29 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { PencilAltIcon } from '@heroicons/react/solid'
+import { PencilAltIcon } from '@heroicons/react/outline'
 import { LogoutIcon, PlusSmIcon, UserIcon } from '@heroicons/react/outline'
 import { useAuth } from 'hooks/useAuth'
 import { MenuType } from 'types/bookTypes'
+import { useHeader } from 'hooks/useHeader'
 
 export const CustomMenu = () => {
   const { signOut } = useAuth()
+  const { openEditUserModal, myPageNavigate, openCreateBookModal } = useHeader()
   const menuItems: MenuType = [
     {
       name: 'Edit my profile',
       icon: PencilAltIcon,
-    },
-    {
-      name: 'Go to my page',
-      icon: UserIcon,
+      onClick: openEditUserModal,
     },
     {
       name: 'Create new book',
       icon: PlusSmIcon,
+      onClick: openCreateBookModal,
+    },
+    {
+      name: 'Go to my page',
+      icon: UserIcon,
+      onClick: myPageNavigate,
     },
   ]
 
@@ -36,7 +41,10 @@ export const CustomMenu = () => {
         <div className="p-1">
           {menuItems.map((item) => (
             <Menu.Item>
-              <button className="text-gray-500 hover:bg-gray-200 group flex rounded-md items-center w-full px-2 py-2 text-sm">
+              <button
+                onClick={item.onClick}
+                className="text-gray-500 hover:bg-blue-100 group flex rounded-md items-center w-full px-2 py-2 text-sm"
+              >
                 <item.icon className="w-6 mr-2" />
                 {item.name}
               </button>
@@ -47,7 +55,7 @@ export const CustomMenu = () => {
           <Menu.Item>
             <button
               onClick={signOut}
-              className="text-gray-500 hover:bg-gray-200 group flex rounded-md items-center w-full px-2 py-2 text-sm"
+              className="text-gray-500 hover:bg-blue-100 group flex rounded-md items-center w-full px-2 py-2 text-sm"
             >
               <LogoutIcon className="w-6 mr-2" />
               Logout
