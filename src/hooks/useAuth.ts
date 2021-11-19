@@ -1,52 +1,100 @@
-import { useCallback, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { SignInData, SignUpData, SignUpFormData } from 'types/userTypes'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { selectAuthData, setAuthData } from 'features/authSlice'
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
+import { SignUpFormData } from 'types/userTypes'
+import { useMutationAuth } from './queries/useMutationAuth'
 
 export const useAuth = () => {
+  const dispatch = useAppDispatch()
+  const authData = useAppSelector(selectAuthData)
   const [isOpenEditModal, setIsOpenEditModal] = useState(false)
   const [isOpenDetailModal, setIsOpenDetailModal] = useState(false)
+  const [isLogin, setIsLogin] = useState(false)
 
   const openEditModal = useCallback(() => setIsOpenEditModal(true), [])
   const closeEditModal = useCallback(() => setIsOpenEditModal(false), [])
   const openDetailModal = useCallback(() => setIsOpenDetailModal(true), [])
   const closeDetailModal = useCallback(() => setIsOpenDetailModal(true), [])
 
-  const { register: registerSignUp, handleSubmit: handleSignUp } =
-    useForm<SignUpData>()
-  const { register: registerSignIn, handleSubmit: handleSignIn } =
-    useForm<SignInData>()
+  const [preview, setPreview] = useState('')
+  const { signInMutate, signUpMutate } = useMutationAuth()
 
-  const signUp: SubmitHandler<SignUpData> = (data) => {
-    const createFormData = (): SignUpFormData => {
-      const formData = new FormData()
+  const changeAuthData = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value
+      const name = e.target.name
+      dispatch(setAuthData({ ...authData, [name]: value }))
+    },
+    [dispatch, authData]
+  )
 
-      formData.append('name', data.name)
-      formData.append('email', data.email)
-      formData.append('password', data.password)
-      formData.append('passwordConfirmation', data.passwordConfirmation)
-      formData.append('introduction', data.introduction)
-      formData.append('image', data.image)
+  const uploadImage = useCallback(
+    (e) => {
+      const file = e.target.files[0] as string
+      dispatch(setAuthData({ ...authData, image: file }))
+    },
+    [dispatch, authData]
+  )
 
-      return formData
-    }
-    const inputData = createFormData()
-  }
-  const signIn: SubmitHandler<SignInData> = (data) => {
-    console.log(data)
-  }
+  const previewImage = useCallback((e) => {
+    const file = e.target.files[0] as string
+    setPreview(window.URL.createObjectURL(file))
+  }, [])
+
+  const imageChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      uploadImage(e)
+      previewImage(e)
+    },
+    [uploadImage, previewImage]
+  )
+
+  const resetPreview = useCallback(() => setPreview(''), [])
+
+  const createFormData = useCallback((): SignUpFormData => {
+    const formData = new FormData()
+    formData.append('name', authData.name)
+    formData.append('email', authData.email)
+    formData.append('password', authData.password)
+    formData.append('passwordConfirmation', authData.passwordConfirmation)
+    formData.append('image', authData.image)
+
+    return formData
+  }, [authData])
+
+  const toggleIsLogin = useCallback(() => setIsLogin(!isLogin), [isLogin])
+
+  const authUser = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      const data = createFormData()
+
+      if (isLogin) {
+        signInMutate.mutate({
+          email: authData.email,
+          password: authData.password,
+        })
+      } else {
+        signUpMutate.mutate(data)
+      }
+    },
+    [isLogin, createFormData, signInMutate, signUpMutate, authData]
+  )
 
   return {
+    isLogin,
+    toggleIsLogin,
+    authUser,
+    authData,
+    changeAuthData,
+    preview,
+    imageChange,
+    resetPreview,
     isOpenEditModal,
     isOpenDetailModal,
     openEditModal,
     closeEditModal,
     openDetailModal,
     closeDetailModal,
-    registerSignIn,
-    registerSignUp,
-    handleSignIn,
-    handleSignUp,
-    signUp,
-    signIn,
   }
 }

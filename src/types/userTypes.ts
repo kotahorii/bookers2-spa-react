@@ -48,5 +48,9 @@ export type UpdateUserFormData = FormData & {
 
 export type SessionRes = {
   status: number
-  current_user: User
+  currentUser: User
+}
+
+export type ResAuthUser = {
+  data: User
 }

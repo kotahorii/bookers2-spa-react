@@ -1,13 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UpdateUserData, User } from 'types/userTypes'
+import { SignUpData, UpdateUserData, User } from 'types/userTypes'
 import { RootState } from '../app/store'
 
 type stateType = {
+  authData: SignUpData
   editedUser: UpdateUserData
   detailUser: User
 }
 
 const initialState: stateType = {
+  authData: {
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+    introduction: '',
+    image: '',
+  },
   editedUser: {
     id: 0,
     name: '',
@@ -31,6 +40,9 @@ export const authSlice = createSlice({
   initialState,
 
   reducers: {
+    setAuthData: (state, action: PayloadAction<SignUpData>) => {
+      state.authData = action.payload
+    },
     setEditedUser: (state, action: PayloadAction<UpdateUserData>) => {
       state.editedUser = action.payload
     },
@@ -47,12 +59,14 @@ export const authSlice = createSlice({
 })
 
 export const {
+  setAuthData,
   setEditedUser,
   setDetailUser,
   resetEditedUser,
   resetDetailUser,
 } = authSlice.actions
 
-export const editedUser = (state: RootState) => state.auth.editedUser
-export const detailUser = (state: RootState) => state.auth.detailUser
+export const selectAuthData = (state: RootState) => state.auth.authData
+export const selectEditedUser = (state: RootState) => state.auth.editedUser
+export const selectDetailUser = (state: RootState) => state.auth.detailUser
 export default authSlice.reducer
