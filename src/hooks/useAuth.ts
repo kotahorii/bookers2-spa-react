@@ -7,14 +7,7 @@ import { useMutationAuth } from './queries/useMutationAuth'
 export const useAuth = () => {
   const dispatch = useAppDispatch()
   const authData = useAppSelector(selectAuthData)
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false)
-  const [isOpenDetailModal, setIsOpenDetailModal] = useState(false)
   const [isLogin, setIsLogin] = useState(true)
-
-  const openEditModal = useCallback(() => setIsOpenEditModal(true), [])
-  const closeEditModal = useCallback(() => setIsOpenEditModal(false), [])
-  const openDetailModal = useCallback(() => setIsOpenDetailModal(true), [])
-  const closeDetailModal = useCallback(() => setIsOpenDetailModal(true), [])
 
   const [preview, setPreview] = useState('')
   const { signInMutate, signUpMutate, signOutMutate } = useMutationAuth()
@@ -93,11 +86,5 @@ export const useAuth = () => {
     preview,
     imageChange,
     resetPreview,
-    isOpenEditModal,
-    isOpenDetailModal,
-    openEditModal,
-    closeEditModal,
-    openDetailModal,
-    closeDetailModal,
   }
 }

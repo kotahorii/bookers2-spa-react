@@ -1,25 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { SignUpData, UpdateUserData, User } from 'types/userTypes'
+import { SignUpData, User } from 'types/userTypes'
 import { RootState } from '../app/store'
 
 type stateType = {
-  authData: SignUpData
-  editedUser: UpdateUserData
+  authData: SignUpData & { id: number }
   detailUser: User
+  isOpenEditUserModal: boolean
 }
 
 const initialState: stateType = {
   authData: {
+    id: 0,
     name: '',
     email: '',
     password: '',
     passwordConfirmation: '',
-    introduction: '',
-    image: '',
-  },
-  editedUser: {
-    id: 0,
-    name: '',
     introduction: '',
     image: '',
   },
@@ -33,6 +28,7 @@ const initialState: stateType = {
     },
     introduction: '',
   },
+  isOpenEditUserModal: false,
 }
 
 export const authSlice = createSlice({
@@ -40,14 +36,11 @@ export const authSlice = createSlice({
   initialState,
 
   reducers: {
-    setAuthData: (state, action: PayloadAction<SignUpData>) => {
+    setAuthData: (
+      state,
+      action: PayloadAction<SignUpData & { id: number }>
+    ) => {
       state.authData = action.payload
-    },
-    setEditedUser: (state, action: PayloadAction<UpdateUserData>) => {
-      state.editedUser = action.payload
-    },
-    resetEditedUser: (state) => {
-      state.editedUser = initialState.editedUser
     },
     setDetailUser: (state, action: PayloadAction<User>) => {
       state.detailUser = action.payload
@@ -55,18 +48,21 @@ export const authSlice = createSlice({
     resetDetailUser: (state) => {
       state.detailUser = initialState.detailUser
     },
+    setIsOpenEditUserModal: (state, action: PayloadAction<boolean>) => {
+      state.isOpenEditUserModal = action.payload
+    },
   },
 })
 
 export const {
   setAuthData,
-  setEditedUser,
   setDetailUser,
-  resetEditedUser,
   resetDetailUser,
+  setIsOpenEditUserModal,
 } = authSlice.actions
 
+export const selectIsOpenEditUserModal = (state: RootState) =>
+  state.auth.isOpenEditUserModal
 export const selectAuthData = (state: RootState) => state.auth.authData
-export const selectEditedUser = (state: RootState) => state.auth.editedUser
 export const selectDetailUser = (state: RootState) => state.auth.detailUser
 export default authSlice.reducer
