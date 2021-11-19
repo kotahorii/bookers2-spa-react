@@ -1,14 +1,13 @@
 import { Auth } from 'components/pages/Auth'
+import { Main } from 'components/pages/Main'
 import { Route, Routes } from 'react-router'
-import { Layout } from './components/templates/Layout'
 
 function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Auth />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path="/" element={<Auth />} />
+      <Route path="/main" element={<Main />} />
+    </Routes>
   )
 }
 
