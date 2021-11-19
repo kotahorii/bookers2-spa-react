@@ -9,14 +9,15 @@ export const LoginForm = () => {
       <CustomInput
         name="email"
         value={authData.email}
-        placeholder="name"
+        placeholder="email"
         onChange={changeAuthData}
       />
       <label className="text-gray-400">Password:</label>
       <CustomInput
         name="password"
         value={authData.password}
-        placeholder="name"
+        type="password"
+        placeholder="password"
         onChange={changeAuthData}
       />
     </>

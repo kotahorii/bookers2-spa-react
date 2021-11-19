@@ -43,6 +43,7 @@ export const SignUpForm = () => {
         />
       </div>
       <div className="flex flex-col space-y-3">
+      <label className="text-gray-400">Introduction:</label>
         <CustomInput
           name="introduction"
           value={authData.introduction}

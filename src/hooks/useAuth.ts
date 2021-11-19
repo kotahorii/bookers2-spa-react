@@ -9,7 +9,7 @@ export const useAuth = () => {
   const authData = useAppSelector(selectAuthData)
   const [isOpenEditModal, setIsOpenEditModal] = useState(false)
   const [isOpenDetailModal, setIsOpenDetailModal] = useState(false)
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
 
   const openEditModal = useCallback(() => setIsOpenEditModal(true), [])
   const closeEditModal = useCallback(() => setIsOpenEditModal(false), [])
