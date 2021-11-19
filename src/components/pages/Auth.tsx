@@ -16,7 +16,7 @@ export const Auth = () => {
         <div className="flex flex-row mt-5 space-x-3 items-center justify-center">
           <CustomButton type="submit" text={isLogin ? 'Login' : 'Register'} />
           <SwitchVerticalIcon
-            className="w-5 text-blue-500 hover:text-blue-400 cursor-pointer"
+            className="w-5 text-blue-500 hover:text-blue-600 cursor-pointer"
             onClick={toggleIsLogin}
           />
         </div>

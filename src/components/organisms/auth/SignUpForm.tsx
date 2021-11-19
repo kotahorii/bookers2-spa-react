@@ -1,4 +1,5 @@
 import { CustomInput } from 'components/atom/CustomInput'
+import { CustomLabel } from 'components/atom/CustomLabel'
 import { ImageInput } from 'components/molecules/ImageInput'
 import { ImagePreview } from 'components/molecules/ImagePreview'
 import { useAuth } from 'hooks/useAuth'
@@ -9,14 +10,14 @@ export const SignUpForm = () => {
   return (
     <div className="flex md:flex-row flex-col items-start md:space-x-5">
       <div className="flex flex-col">
-        <label className="text-gray-400">Name:</label>
+        <CustomLabel title="Name:" />
         <CustomInput
           name="name"
           value={authData.name}
           placeholder="name"
           onChange={changeAuthData}
         />
-        <label className="text-gray-400">Email:</label>
+        <CustomLabel title="Email:" />
         <CustomInput
           name="email"
           value={authData.email}
@@ -25,7 +26,7 @@ export const SignUpForm = () => {
         />
       </div>
       <div className="flex flex-col">
-        <label className="text-gray-400">Password:</label>
+        <CustomLabel title="Password:" />
         <CustomInput
           name="password"
           value={authData.password}
@@ -33,7 +34,7 @@ export const SignUpForm = () => {
           type="password"
           onChange={changeAuthData}
         />
-        <label className="text-gray-400">PasswordConfirmation:</label>
+        <CustomLabel title="Password confirmation:" />
         <CustomInput
           name="passwordConfirmation"
           value={authData.passwordConfirmation}
@@ -43,7 +44,7 @@ export const SignUpForm = () => {
         />
       </div>
       <div className="flex flex-col space-y-3">
-      <label className="text-gray-400">Introduction:</label>
+        <CustomLabel title="Introduction:" />
         <CustomInput
           name="introduction"
           value={authData.introduction}

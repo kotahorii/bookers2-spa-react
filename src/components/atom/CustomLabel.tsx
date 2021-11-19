@@ -5,5 +5,5 @@ type Props = {
 }
 
 export const CustomLabel: VFC<Props> = ({ title }) => {
-  return <label className="text-gray-400">{title}</label>
+  return <label className="text-gray-500">{title}</label>
 }

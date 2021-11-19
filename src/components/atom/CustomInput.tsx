@@ -19,7 +19,7 @@ const CustomInputMemo: VFC<Props> = ({
     <input
       type={type}
       placeholder={placeholder}
-      className="my-3 px-3 py-1 bg-gray-600 text-gray-400 rounded-lg border border-gray-500"
+      className="my-3 px-3 py-2 bg-gray-200 text-gray-600 rounded-md focus:bg-gray-50"
       name={name}
       value={value}
       onChange={onChange}
