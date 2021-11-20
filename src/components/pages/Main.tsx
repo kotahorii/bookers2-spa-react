@@ -5,7 +5,14 @@ import { Layout } from 'components/templates/Layout'
 import { useBooks } from 'hooks/useBooks'
 
 export const Main = () => {
-  const { books, isOpenDetailBook, closeDetailBook } = useBooks()
+  const {
+    books,
+    isOpenDetailBook,
+    closeDetailBook,
+    isLoadingUser,
+    isLoadingBooks,
+  } = useBooks()
+  if (isLoadingBooks || isLoadingUser) return null
   return (
     <Layout>
       <div className="md:flex md:flex-wrap items-start block md:space-x-5 space-y-3">

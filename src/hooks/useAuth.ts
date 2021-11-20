@@ -1,5 +1,9 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { selectAuthData, setAuthData } from 'slices/authSlice'
+import {
+  selectAuthData,
+  setAuthData,
+  setIsOpenEditUserModal,
+} from 'slices/authSlice'
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
 import { SignUpFormData, UpdateUserFormData } from 'types/userTypes'
 import { useMutationAuth } from './queries/useMutationAuth'
@@ -89,15 +93,16 @@ export const useAuth = () => {
   }, [authData])
 
   const updateUser = useCallback(
-    (e: FormEvent<HTMLFontElement>) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       const data = {
         id: currentUser?.id,
         formData: createEditFormData(),
       }
       updateUserMutation.mutate(data)
+      dispatch(setIsOpenEditUserModal(false))
     },
-    [currentUser, createEditFormData, updateUserMutation]
+    [currentUser, createEditFormData, updateUserMutation, dispatch]
   )
 
   return {

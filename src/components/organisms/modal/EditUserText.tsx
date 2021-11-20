@@ -6,10 +6,16 @@ import { ImagePreview } from 'components/molecules/ImagePreview'
 import { useAuth } from 'hooks/useAuth'
 
 export const EditUserText = () => {
-  const { authData, changeAuthData, imageChange, preview, resetPreview } =
-    useAuth()
+  const {
+    authData,
+    changeAuthData,
+    imageChange,
+    preview,
+    resetPreview,
+    updateUser,
+  } = useAuth()
   return (
-    <form className="mt-2 flex flex-col">
+    <form onSubmit={updateUser} className="mt-2 flex flex-col">
       <CustomLabel title="Name:" />
       <CustomInput
         name="name"
@@ -28,7 +34,7 @@ export const EditUserText = () => {
         <ImageInput onChange={imageChange} />
         <ImagePreview preview={preview} resetPreview={resetPreview} />
       </div>
-      <CustomButton text="Update" />
+      <CustomButton type="submit" text="Update" />
     </form>
   )
 }

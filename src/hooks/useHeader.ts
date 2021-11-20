@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { ChangeEvent, useCallback } from 'react'
+import { ChangeEvent, FormEvent, useCallback } from 'react'
 import { useNavigate } from 'react-router'
 import {
   selectIsOpenEditUserModal,
@@ -7,17 +7,20 @@ import {
   setIsOpenEditUserModal,
 } from 'slices/authSlice'
 import {
+  resetEditedBook,
   selectEditedBook,
   selectIsOpenBookModal,
   setEditedBook,
   setIsOpenBookModal,
 } from 'slices/bookSlice'
+import { useMutateBooks } from './queries/useMutateBooks'
 import { useQueryUser } from './queries/useQueryCurrentUser'
 import { useAuth } from './useAuth'
 
 export const useHeader = () => {
   const dispatch = useAppDispatch()
   const { data: currentUser } = useQueryUser()
+  const { createBookMutation, updateBookMutation } = useMutateBooks()
   const { authData } = useAuth()
   const editedBook = useAppSelector(selectEditedBook)
   const isOpenBookModal = useAppSelector(selectIsOpenBookModal)
@@ -64,10 +67,31 @@ export const useHeader = () => {
     navigate('/myPage')
   }, [navigate])
 
+  const submitBook = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      if (editedBook.id === 0) {
+        createBookMutation.mutate(editedBook)
+      } else {
+        updateBookMutation.mutate(editedBook)
+      }
+      closeCreateBookModal()
+      dispatch(resetEditedBook())
+    },
+    [
+      createBookMutation,
+      updateBookMutation,
+      editedBook,
+      dispatch,
+      closeCreateBookModal,
+    ]
+  )
+
   return {
     isOpenBookModal,
     isOpenEditUserModal,
     editedBook,
+    submitBook,
     changeBook,
     openEditUserModal,
     closeEditedUserModal,

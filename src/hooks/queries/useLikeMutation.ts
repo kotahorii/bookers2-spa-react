@@ -16,13 +16,13 @@ export const useLikeMutation = () => {
         },
       }),
     {
-      onSuccess: (res, variable) => {
+      onSuccess: (res) => {
         const previousFavorites =
           queryClient.getQueryData<Favorite[]>('favorites')
         if (previousFavorites) {
           queryClient.setQueryData<Favorite[]>('favorites', [
-            ...previousFavorites,
             res.data,
+            ...previousFavorites,
           ])
         }
       },

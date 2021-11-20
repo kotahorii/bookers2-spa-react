@@ -48,6 +48,24 @@ export type CreateFavorite = {
 
 export type DeleteFavorite = CreateFavorite & { id: number }
 
+export type Rate = {
+  rate: number
+  book_id: number
+  user_id: number
+  id: number
+  created_at: string
+  updated_at: string
+}
+
+export type CreateRate = {
+  bookId: number
+  rate: number
+}
+
+export type UpdateRate = CreateRate & {
+  id: number
+}
+
 export type MenuType = {
   name: string
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element

@@ -4,24 +4,26 @@ import { CustomLabel } from 'components/atom/CustomLabel'
 import { useHeader } from 'hooks/useHeader'
 
 export const CreateOrEditBook = () => {
-  const { changeBook, editedBook } = useHeader()
+  const { changeBook, editedBook, submitBook } = useHeader()
   return (
-    <form className="mt-2 flex flex-col">
-      <CustomLabel title="Title:" />
-      <CustomInput
-        name="title"
-        value={editedBook.title}
-        placeholder="Name"
-        onChange={changeBook}
-      />
-      <CustomLabel title="Body:" />
-      <CustomInput
-        name="body"
-        value={editedBook.body}
-        placeholder="Body"
-        onChange={changeBook}
-      />
-      <CustomButton text="Create" />
-    </form>
+    <>
+      <form onSubmit={submitBook} className="mt-2 flex flex-col">
+        <CustomLabel title="Title:" />
+        <CustomInput
+          name="title"
+          value={editedBook.title}
+          placeholder="Name"
+          onChange={changeBook}
+        />
+        <CustomLabel title="Body:" />
+        <CustomInput
+          name="body"
+          value={editedBook.body}
+          placeholder="Body"
+          onChange={changeBook}
+        />
+        <CustomButton type="submit" text="Create" />
+      </form>
+    </>
   )
 }
