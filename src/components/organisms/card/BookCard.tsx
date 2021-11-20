@@ -1,18 +1,25 @@
+import { useAppDispatch } from 'app/hooks'
 import { VFC } from 'react'
+import { setDetailBook, setIsOpenDetailBookModal } from 'slices/bookSlice'
 import { Book } from 'types/bookTypes'
-import { HeartIcon as SolidLike } from '@heroicons/react/solid'
-import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
 
 type Props = {
   book: Book
 }
 
 export const BookCard: VFC<Props> = ({ book }) => {
+  const dispatch = useAppDispatch()
+  const openDetailBook = () => {
+    dispatch(setDetailBook(book))
+    dispatch(setIsOpenDetailBookModal(true))
+  }
   return (
-    <div className="flex flex-col px-2 py-2 shadow-md hover:shadow-lg rounded-lg space-y-3">
+    <div
+      onClick={openDetailBook}
+      className="flex flex-col cursor-pointer px-2 py-2 shadow-md hover:shadow-lg rounded-lg space-y-3"
+    >
       <div className="w-48 h-36 bg-gray-300 rounded-lg"></div>
       <p className="text-lg text-center">{book.title}</p>
-      <SolidLike className="w-8 p-1 text-red-400 rounded-full hover:bg-gray-200 cursor-pointer" />
     </div>
   )
 }
