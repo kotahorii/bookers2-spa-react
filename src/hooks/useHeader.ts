@@ -1,3 +1,10 @@
+import {
+  PencilAltIcon,
+  PlusSmIcon,
+  UserIcon,
+  UsersIcon,
+  BookOpenIcon,
+} from '@heroicons/react/outline'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { ChangeEvent, FormEvent, useCallback } from 'react'
 import { useNavigate } from 'react-router'
@@ -13,6 +20,7 @@ import {
   setEditedBook,
   setIsOpenBookModal,
 } from 'slices/bookSlice'
+import { MenuType } from 'types/bookTypes'
 import { useMutateBooks } from './queries/useMutateBooks'
 import { useQueryUser } from './queries/useQueryCurrentUser'
 import { useAuth } from './useAuth'
@@ -87,6 +95,37 @@ export const useHeader = () => {
     ]
   )
 
+  const menuItems: MenuType = [
+    {
+      name: 'Edit my profile',
+      icon: PencilAltIcon,
+      onClick: openEditUserModal,
+    },
+    {
+      name: 'Create new book',
+      icon: PlusSmIcon,
+      onClick: openCreateBookModal,
+    },
+    {
+      name: 'Go to my page',
+      icon: UserIcon,
+      onClick: myPageNavigate,
+    },
+  ]
+
+  const responsiveItems: MenuType = [
+    {
+      name: 'Users page',
+      icon: UsersIcon,
+      onClick: () => navigate('/users'),
+    },
+    {
+      name: 'Books page',
+      icon: BookOpenIcon,
+      onClick: () => navigate('/main'),
+    },
+  ]
+
   return {
     isOpenBookModal,
     isOpenEditUserModal,
@@ -98,5 +137,7 @@ export const useHeader = () => {
     openCreateBookModal,
     closeCreateBookModal,
     myPageNavigate,
+    menuItems,
+    responsiveItems,
   }
 }

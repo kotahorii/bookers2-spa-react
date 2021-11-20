@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react'
-import { CustomMenu } from 'components/organisms/books/CustomMenu'
+import { CustomMenu } from 'components/organisms/menu/CustomMenu'
 import { CreateOrEditBook } from 'components/organisms/modal/CreateOrEditBook'
 import { CustomModal } from 'components/organisms/modal/CustomModal'
 import { EditUserText } from 'components/organisms/modal/EditUserText'

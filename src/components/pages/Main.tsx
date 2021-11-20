@@ -9,6 +9,7 @@ export const Main = () => {
     books,
     isOpenDetailBook,
     closeDetailBook,
+    detailBook,
     isLoadingUser,
     isLoadingBooks,
   } = useBooks()
@@ -21,7 +22,7 @@ export const Main = () => {
         ))}
       </div>
       <CustomModal
-        title="Detail Book"
+        title={detailBook.title}
         isOpen={isOpenDetailBook}
         closeModal={closeDetailBook}
       >
