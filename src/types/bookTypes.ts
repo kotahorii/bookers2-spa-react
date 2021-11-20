@@ -4,8 +4,6 @@ export type Book = {
   body: string
   userId: number
   createdAt: string
-  comments: Comment[]
-  favorites: Favorite[]
 }
 
 export type CreateBook = {

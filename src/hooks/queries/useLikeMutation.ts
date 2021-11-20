@@ -1,24 +1,29 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import client from 'lib/client'
 import { useMutation, useQueryClient } from 'react-query'
-import { Book, CreateFavorite, DeleteFavorite, Favorite } from 'types/bookTypes'
+import { Favorite, CreateFavorite, DeleteFavorite } from 'types/bookTypes'
 
 export const useLikeMutation = () => {
   const queryClient = useQueryClient()
   const createLikeMutation = useMutation(
-    (data: CreateFavorite) => client.post<Favorite>('favorites', data),
+    (data: CreateFavorite) =>
+      client.post<Favorite>('favorites', data, {
+        headers: {
+          'access-token': Cookies.get('_access_token') as string,
+          client: Cookies.get('_client') as string,
+          uid: Cookies.get('_uid') as string,
+        },
+      }),
     {
       onSuccess: (res, variable) => {
-        const previousBooks = queryClient.getQueryData<Book[]>('books')
-        if (previousBooks) {
-          queryClient.setQueryData<Book[]>(
-            'books',
-            previousBooks.map((book) =>
-              book.id === variable.bookId
-                ? { ...book, favorites: [...book.favorites, res.data] }
-                : book
-            )
-          )
+        const previousFavorites =
+          queryClient.getQueryData<Favorite[]>('favorites')
+        if (previousFavorites) {
+          queryClient.setQueryData<Favorite[]>('favorites', [
+            ...previousFavorites,
+            res.data,
+          ])
         }
       },
     }
@@ -27,22 +32,22 @@ export const useLikeMutation = () => {
     (data: DeleteFavorite) =>
       axios.request({
         method: 'delete',
-        url: `${process.env.REACT_APP_REST_URL}/favorites/${data.id}`,
-        data: { bookId: data.bookId },
+        url: `http://localhost:8000/api/v1/favorites/${data.id}`,
+        data: { book_id: data.bookId },
+        headers: {
+          'access-token': Cookies.get('_access_token') as string,
+          client: Cookies.get('_client') as string,
+          uid: Cookies.get('_uid') as string,
+        },
       }),
     {
       onSuccess: (res, variable) => {
-        const previousBooks = queryClient.getQueryData<Book[]>('books')
-        if (previousBooks) {
-          previousBooks?.map((book) =>
-            book.id === variable.bookId
-              ? {
-                  ...book,
-                  favorites: book.favorites.filter(
-                    (favorite) => favorite.bookId !== variable.bookId
-                  ),
-                }
-              : book
+        const previousFavorites =
+          queryClient.getQueryData<Favorite[]>('favorites')
+        if (previousFavorites) {
+          queryClient.setQueryData<Favorite[]>(
+            'favorites',
+            previousFavorites.filter((fav) => fav.id !== variable.id)
           )
         }
       },

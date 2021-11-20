@@ -5,7 +5,11 @@ import { Book, CreateBook, UpdateBook } from 'types/bookTypes'
 export const useMutateBooks = () => {
   const queryClient = useQueryClient()
   const createBookMutation = useMutation(
-    (data: CreateBook) => client.post<Book>('books', data),
+    (data: CreateBook) => client.post<Book>('books', data, {
+      headers: {
+        
+      }
+    }),
     {
       onSuccess: (res) => {
         const previousBooks = queryClient.getQueryData<Book[]>('books')

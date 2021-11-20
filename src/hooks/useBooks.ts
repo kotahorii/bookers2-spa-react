@@ -6,9 +6,11 @@ import {
   selectIsOpenDetailBookModal,
   setIsOpenDetailBookModal,
 } from 'slices/bookSlice'
+import { useLikeMutation } from './queries/useLikeMutation'
 import { useMutateBooks } from './queries/useMutateBooks'
 import { useQueryBooks } from './queries/useQueryBooks'
 import { useQueryUser } from './queries/useQueryCurrentUser'
+import { useQueryFavorites } from './queries/useQueryFavarites'
 
 export const useBooks = () => {
   const dispatch = useAppDispatch()
@@ -18,6 +20,8 @@ export const useBooks = () => {
   const editedBook = useAppSelector(selectEditedBook)
   const detailBook = useAppSelector(selectDetailBook)
   const { createBookMutation, updateBookMutation } = useMutateBooks()
+  const { createLikeMutation, deleteLikeMutation } = useLikeMutation()
+  const { data: favorites } = useQueryFavorites()
 
   const closeDetailBook = useCallback(() => {
     dispatch(setIsOpenDetailBookModal(false))
@@ -42,20 +46,40 @@ export const useBooks = () => {
     [createBookMutation, updateBookMutation, editedBook]
   )
 
+  const booksFavorites = useCallback(
+    () => favorites?.filter((fav) => fav.bookId === detailBook.id),
+    [detailBook, favorites]
+  )
+
   const isLiked = useCallback(() => {
-    return (
-      detailBook.favorites.filter((fav) => fav.userId === currentUser?.id)
-        .length > 0
-    )
-  }, [detailBook, currentUser])
+    if (booksFavorites) {
+      return (
+        booksFavorites()!.filter((fav) => fav.userId === currentUser?.id)
+          .length > 0
+      )
+    }
+  }, [booksFavorites, currentUser])
 
   const toggleLike = useCallback(() => {
     if (isLiked()) {
+      const fav = booksFavorites()!.filter(
+        (fav) => fav.userId === currentUser?.id
+      )[0]
+      deleteLikeMutation.mutate({ id: fav.id, bookId: detailBook.id })
     } else {
+      createLikeMutation.mutate({ bookId: detailBook.id })
     }
-  }, [isLiked])
+  }, [
+    isLiked,
+    currentUser,
+    createLikeMutation,
+    deleteLikeMutation,
+    booksFavorites,
+    detailBook,
+  ])
 
   return {
+    booksFavorites,
     books,
     detailBook,
     currentUser,

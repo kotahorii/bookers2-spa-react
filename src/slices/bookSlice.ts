@@ -21,8 +21,6 @@ const initialState: stateType = {
     body: '',
     userId: 0,
     createdAt: '',
-    comments: [],
-    favorites: [],
   },
   isOpenDetailBookModal: false,
   isOpenBookModal: false,
