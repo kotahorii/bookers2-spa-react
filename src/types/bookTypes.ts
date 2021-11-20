@@ -2,7 +2,7 @@ export type Book = {
   id: number
   title: string
   body: string
-  user_id: number
+  userId: number
   createdAt: string
   comments: Comment[]
   favorites: Favorite[]
@@ -20,8 +20,8 @@ export type UpdateBook = CreateBook & {
 export type Comment = {
   id: number
   comment: string
-  user_id: number
-  book_id: number
+  userId: number
+  bookId: number
   created_at?: Date
   updated_at?: Date
 }
@@ -38,8 +38,8 @@ export type DeleteComment = {
 
 export type Favorite = {
   id: number
-  user_id: number
-  book_id: number
+  userId: number
+  bookId: number
   created_at?: Date
   updated_at?: Date
 }

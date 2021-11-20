@@ -12,7 +12,7 @@ export const useMutationAuth = () => {
     (data: SignInData) => client.post<ResAuthUser>('auth/sign_in', data),
     {
       onSuccess: (res) => {
-        queryClient.setQueryData('currentUser', res.data.data)
+        queryClient.setQueryData('user', res.data.data)
         Cookies.set('_access_token', res.headers['access-token'])
         Cookies.set('_client', res.headers['client'])
         Cookies.set('_uid', res.headers['uid'])

@@ -10,7 +10,7 @@ export const Main = () => {
     <Layout>
       <div className="md:flex md:flex-wrap items-start block md:space-x-5 space-y-3">
         {books?.map((book) => (
-          <BookCard book={book} />
+          <BookCard key={book.id} book={book} />
         ))}
       </div>
       <CustomModal

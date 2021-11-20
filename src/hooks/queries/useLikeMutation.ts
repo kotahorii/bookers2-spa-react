@@ -39,7 +39,7 @@ export const useLikeMutation = () => {
               ? {
                   ...book,
                   favorites: book.favorites.filter(
-                    (favorite) => favorite.book_id !== variable.bookId
+                    (favorite) => favorite.bookId !== variable.bookId
                   ),
                 }
               : book

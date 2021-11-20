@@ -4,6 +4,7 @@ import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
 
 export const DetailBookText = () => {
   const { isLiked } = useBooks()
+  console.log(isLiked())
   return (
     <div className="flex flex-col">
       {isLiked() ? (

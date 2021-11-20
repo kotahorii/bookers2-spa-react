@@ -19,7 +19,7 @@ const initialState: stateType = {
     id: 0,
     title: '',
     body: '',
-    user_id: 0,
+    userId: 0,
     createdAt: '',
     comments: [],
     favorites: [],

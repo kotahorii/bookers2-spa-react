@@ -40,7 +40,7 @@ export const CustomMenu = () => {
       <Menu.Items className="absolute left-3 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div className="p-1">
           {menuItems.map((item) => (
-            <Menu.Item>
+            <Menu.Item key={item.name}>
               <button
                 onClick={item.onClick}
                 className="text-gray-500 hover:bg-blue-100 group flex rounded-md items-center w-full px-2 py-2 text-sm"

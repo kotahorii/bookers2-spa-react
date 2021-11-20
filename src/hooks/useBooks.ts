@@ -42,10 +42,10 @@ export const useBooks = () => {
     [createBookMutation, updateBookMutation, editedBook]
   )
 
-  const isLiked = useCallback((): boolean => {
+  const isLiked = useCallback(() => {
     return (
-      detailBook.favorites.filter((fav) => fav.user_id === currentUser?.id) !==
-      []
+      detailBook.favorites.filter((fav) => fav.userId === currentUser?.id)
+        .length > 0
     )
   }, [detailBook, currentUser])
 
