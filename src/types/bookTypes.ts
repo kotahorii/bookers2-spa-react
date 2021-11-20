@@ -27,8 +27,13 @@ export type Comment = {
 }
 
 export type CreateComment = {
-  bookId: string
+  bookId: number
   comment: string
+}
+
+export type DeleteComment = {
+  id: number
+  bookId: string
 }
 
 export type Favorite = {
@@ -39,9 +44,11 @@ export type Favorite = {
   updated_at?: Date
 }
 
-export type CreateAndDestroyFavorite = {
-  bookId: string
+export type CreateFavorite = {
+  bookId: number
 }
+
+export type DeleteFavorite = CreateFavorite & { id: number }
 
 export type MenuType = {
   name: string

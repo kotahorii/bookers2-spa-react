@@ -1,13 +1,17 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { selectAuthData, setAuthData } from 'slices/authSlice'
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
-import { SignUpFormData } from 'types/userTypes'
+import { SignUpFormData, UpdateUserFormData } from 'types/userTypes'
 import { useMutationAuth } from './queries/useMutationAuth'
+import { useQueryUser } from './queries/useQueryCurrentUser'
+import { useMutationUsers } from './queries/useMutationUsers'
 
 export const useAuth = () => {
   const dispatch = useAppDispatch()
   const authData = useAppSelector(selectAuthData)
   const [isLogin, setIsLogin] = useState(true)
+  const { data: currentUser } = useQueryUser()
+  const { updateUserMutation } = useMutationUsers()
 
   const [preview, setPreview] = useState('')
   const { signInMutate, signUpMutate, signOutMutate } = useMutationAuth()
@@ -76,6 +80,26 @@ export const useAuth = () => {
 
   const signOut = useCallback(() => signOutMutate.mutate(), [signOutMutate])
 
+  const createEditFormData = useCallback((): UpdateUserFormData => {
+    const formData = new FormData()
+    formData.append('name', authData.name || '')
+    formData.append('introduction', authData.introduction || '')
+    formData.append('image', authData.image)
+    return formData
+  }, [authData])
+
+  const updateUser = useCallback(
+    (e: FormEvent<HTMLFontElement>) => {
+      e.preventDefault()
+      const data = {
+        id: currentUser?.id,
+        formData: createEditFormData(),
+      }
+      updateUserMutation.mutate(data)
+    },
+    [currentUser, createEditFormData, updateUserMutation]
+  )
+
   return {
     isLogin,
     toggleIsLogin,
@@ -86,5 +110,6 @@ export const useAuth = () => {
     preview,
     imageChange,
     resetPreview,
+    updateUser,
   }
 }

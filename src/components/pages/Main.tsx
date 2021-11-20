@@ -1,4 +1,4 @@
-import { BookCard } from 'components/organisms/books/BookCard'
+import { BookCard } from 'components/organisms/card/BookCard'
 import { Layout } from 'components/templates/Layout'
 import { useBooks } from 'hooks/useBooks'
 import React from 'react'
