@@ -18,7 +18,7 @@ export const Main = () => {
   if (isLoadingBooks || isLoadingUser || isLoadingRates)
     return (
       <Layout>
-        <div className="md:flex md:flex-wrap md:items-center items-start justify-center block">
+        <div className="md:flex md:flex-wrap md:items-center justify-center block">
           {[...Array(18)]
             .map((_, i) => i)
             ?.map((i) => (
@@ -29,7 +29,7 @@ export const Main = () => {
     )
   return (
     <Layout>
-      <div className="md:flex md:flex-wrap md:items-center items-start justify-center block">
+      <div className="md:flex md:flex-wrap md:items-center justify-center block">
         {books?.map((book) => (
           <BookCard key={book.id} book={book} />
         ))}

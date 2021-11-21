@@ -12,7 +12,7 @@ export const CustomRateInput = () => {
           .map((i) => (
             <OutLineStar
               onClick={rateCreate(i + 1)}
-              className="w-6 text-yellow-400"
+              className="w-6 h-6 text-yellow-400 rounded-full hover:bg-gray-100 cursor-pointer"
               key={i}
             />
           ))
@@ -23,7 +23,7 @@ export const CustomRateInput = () => {
             .map((i) => (
               <SolidStar
                 onClick={rateUpdate(i + 1)}
-                className="w-6 text-yellow-400"
+                className="w-6 h-6 text-yellow-400 rounded-full hover:bg-gray-100 cursor-pointer"
                 key={i}
               />
             ))}
@@ -32,7 +32,7 @@ export const CustomRateInput = () => {
             .map((i) => (
               <OutLineStar
                 onClick={rateUpdate(i + rate + 1)}
-                className="w-6 text-yellow-400"
+                className="w-6 h-6 text-yellow-400 rounded-full hover:bg-gray-100 cursor-pointer"
                 key={i}
               />
             ))}

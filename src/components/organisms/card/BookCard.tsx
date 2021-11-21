@@ -3,6 +3,7 @@ import { VFC } from 'react'
 import { Book } from 'types/bookTypes'
 import { HeartIcon as SolidLike } from '@heroicons/react/solid'
 import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
+import { RateAverage } from '../comment/RateAverage'
 
 type Props = {
   book: Book
@@ -33,10 +34,15 @@ export const BookCard: VFC<Props> = ({ book }) => {
           )}
           <span>{booksFavorites(book)?.length}</span>
         </div>
-        <div>
-          {averageRate(book)?.toString() !== 'NaN'
-            ? averageRate(book)?.toString()
-            : 0}
+        <div className="flex flex-row">
+          <div className="mr-1">
+            <RateAverage book={book} />
+          </div>
+          <p>
+            {averageRate(book)?.toString() !== 'NaN'
+              ? averageRate(book)?.toString()
+              : 0}
+          </p>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ export const Users = () => {
   const { users } = useUsers()
   return (
     <Layout>
-      <div className="md:flex md:flex-wrap items-start block md:space-x-5 space-y-3">
+      <div className="md:flex md:flex-wrap block">
         {users?.map((user) => (
           <UserCard key={user.id} user={user} />
         ))}
