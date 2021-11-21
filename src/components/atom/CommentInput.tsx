@@ -1,17 +1,18 @@
-import { VFC } from 'react'
+import { ChangeEvent, VFC } from 'react'
 
 type Props = {
-  name: string
   value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  placeholder: string
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-export const CommentInput: VFC<Props> = ({ value, onChange }) => {
+export const CommentInput: VFC<Props> = ({ value, onChange, placeholder }) => {
   return (
-    <input
-      className="my-3 px-3 py-2 focus:ring-blue-400 bg-gray-200 text-gray-600 rounded-md focus:bg-gray-50"
+    <textarea
+      className=" px-3 py-2 bg-transparent rounded-lg border w-full bg-gray-200 focus:outline-none text-gray-600"
       value={value}
       onChange={onChange}
-    />
+      placeholder={placeholder}
+    ></textarea>
   )
 }

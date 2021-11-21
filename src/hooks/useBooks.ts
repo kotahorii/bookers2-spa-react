@@ -5,6 +5,7 @@ import {
   selectIsOpenDetailBookModal,
   setIsOpenDetailBookModal,
 } from 'slices/bookSlice'
+import { useCommentMutation } from './queries/useCommentMutation'
 import { useLikeMutation } from './queries/useLikeMutation'
 import { useQueryBooks } from './queries/useQueryBooks'
 import { useQueryComments } from './queries/useQueryComments'
@@ -21,15 +22,21 @@ export const useBooks = () => {
   const { createLikeMutation, deleteLikeMutation } = useLikeMutation()
   const { data: favorites } = useQueryFavorites()
   const { data: comments } = useQueryComments()
+  const { createCommentMutation } = useCommentMutation()
 
   const commentChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setComment(e.target.value),
+    (e: ChangeEvent<HTMLTextAreaElement>) => setComment(e.target.value),
     []
   )
 
-  const submitComment = useCallback((e: FormEvent<HTMLFormElement>) => {
-    
-  }, [])
+  const submitComment = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      createCommentMutation.mutate({ bookId: detailBook.id, comment: comment })
+      setComment('')
+    },
+    [comment, createCommentMutation, detailBook.id]
+  )
 
   const closeDetailBook = useCallback(() => {
     dispatch(setIsOpenDetailBookModal(false))
@@ -84,5 +91,8 @@ export const useBooks = () => {
     closeDetailBook,
     isLoadingUser,
     isLoadingBooks,
+    comment,
+    commentChange,
+    submitComment,
   }
 }
