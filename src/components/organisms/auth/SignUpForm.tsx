@@ -3,8 +3,9 @@ import { CustomLabel } from 'components/atom/CustomLabel'
 import { ImageInput } from 'components/molecules/ImageInput'
 import { ImagePreview } from 'components/molecules/ImagePreview'
 import { useAuth } from 'hooks/useAuth'
+import { memo } from 'react'
 
-export const SignUpForm = () => {
+export const SignUpForm = memo(() => {
   const { authData, changeAuthData, imageChange, preview, resetPreview } =
     useAuth()
   return (
@@ -58,4 +59,4 @@ export const SignUpForm = () => {
       </div>
     </div>
   )
-}
+})

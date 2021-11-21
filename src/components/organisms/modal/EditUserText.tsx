@@ -4,8 +4,9 @@ import { CustomLabel } from 'components/atom/CustomLabel'
 import { ImageInput } from 'components/molecules/ImageInput'
 import { ImagePreview } from 'components/molecules/ImagePreview'
 import { useAuth } from 'hooks/useAuth'
+import { memo } from 'react'
 
-export const EditUserText = () => {
+export const EditUserText = memo(() => {
   const {
     authData,
     changeAuthData,
@@ -37,4 +38,4 @@ export const EditUserText = () => {
       <CustomButton disabled={!authData.name} type="submit" text="Update" />
     </form>
   )
-}
+})

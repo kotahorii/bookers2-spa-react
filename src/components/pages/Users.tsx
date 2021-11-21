@@ -1,8 +1,9 @@
 import { UserCard } from 'components/organisms/card/UserCard'
 import { Layout } from 'components/templates/Layout'
 import { useUsers } from 'hooks/useUsers'
+import { memo } from 'react'
 
-export const Users = () => {
+export const Users = memo(() => {
   const { users } = useUsers()
   return (
     <Layout>
@@ -13,4 +14,4 @@ export const Users = () => {
       </div>
     </Layout>
   )
-}
+})

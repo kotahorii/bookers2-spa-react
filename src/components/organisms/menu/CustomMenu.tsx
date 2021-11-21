@@ -1,10 +1,10 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, memo } from 'react'
 import { LogoutIcon } from '@heroicons/react/outline'
 import { useAuth } from 'hooks/useAuth'
 import { useHeader } from 'hooks/useHeader'
 
-export const CustomMenu = () => {
+export const CustomMenu = memo(() => {
   const { signOut } = useAuth()
   const { menuItems, responsiveItems } = useHeader()
   return (
@@ -58,4 +58,4 @@ export const CustomMenu = () => {
       </Menu.Items>
     </Transition>
   )
-}
+})

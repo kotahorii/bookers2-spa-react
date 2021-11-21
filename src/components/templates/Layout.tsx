@@ -5,13 +5,13 @@ import { CustomModal } from 'components/organisms/modal/CustomModal'
 import { EditUserText } from 'components/organisms/modal/EditUserText'
 import { Header } from 'components/templates/Header'
 import { useHeader } from 'hooks/useHeader'
-import { VFC, ReactNode } from 'react'
+import { VFC, ReactNode, memo } from 'react'
 
 type Props = {
   children: ReactNode
 }
 
-export const Layout: VFC<Props> = ({ children }) => {
+export const Layout: VFC<Props> = memo(({ children }) => {
   const {
     isOpenEditUserModal,
     closeEditedUserModal,
@@ -43,4 +43,4 @@ export const Layout: VFC<Props> = ({ children }) => {
       </div>
     </Menu>
   )
-}
+})

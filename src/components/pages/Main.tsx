@@ -4,8 +4,9 @@ import { CustomModal } from 'components/organisms/modal/CustomModal'
 import { DetailBookText } from 'components/organisms/modal/DetailBookText'
 import { Layout } from 'components/templates/Layout'
 import { useBooks } from 'hooks/useBooks'
+import { memo } from 'react'
 
-export const Main = () => {
+export const Main = memo(() => {
   const {
     books,
     isOpenDetailBook,
@@ -43,4 +44,4 @@ export const Main = () => {
       </CustomModal>
     </Layout>
   )
-}
+})

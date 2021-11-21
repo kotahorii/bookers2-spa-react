@@ -1,9 +1,10 @@
 import { CustomUserIcon } from 'components/molecules/CustomUserIcon'
 import { useBooks } from 'hooks/useBooks'
 import { useUsers } from 'hooks/useUsers'
+import { memo } from 'react'
 import { CommentList } from '../comment/CommentList'
 
-export const DetailBookText = () => {
+export const DetailBookText = memo(() => {
   const { booksUser } = useUsers()
   const { detailBook } = useBooks()
   return (
@@ -15,4 +16,4 @@ export const DetailBookText = () => {
       <CommentList />
     </div>
   )
-}
+})

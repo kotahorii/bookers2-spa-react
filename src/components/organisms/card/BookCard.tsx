@@ -1,5 +1,5 @@
 import { useBooks } from 'hooks/useBooks'
-import { VFC } from 'react'
+import { memo, VFC } from 'react'
 import { Book } from 'types/bookTypes'
 import { HeartIcon as SolidLike } from '@heroicons/react/solid'
 import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
@@ -9,7 +9,7 @@ type Props = {
   book: Book
 }
 
-export const BookCard: VFC<Props> = ({ book }) => {
+export const BookCard: VFC<Props> = memo(({ book }) => {
   const { averageRate, isLiked, toggleLike, booksFavorites, openDetailBook } =
     useBooks()
 
@@ -47,4 +47,4 @@ export const BookCard: VFC<Props> = ({ book }) => {
       </div>
     </div>
   )
-}
+})

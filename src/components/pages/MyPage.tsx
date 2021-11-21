@@ -1,8 +1,8 @@
 import { Layout } from 'components/templates/Layout'
-import React from 'react'
+import { memo } from 'react'
 
-export const MyPage = () => {
+export const MyPage = memo(() => {
   return <Layout>
     
   </Layout>
-}
+})

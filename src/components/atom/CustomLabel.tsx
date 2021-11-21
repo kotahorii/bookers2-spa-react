@@ -1,9 +1,9 @@
-import { VFC } from 'react'
+import { memo, VFC } from 'react'
 
 type Props = {
   title: string
 }
 
-export const CustomLabel: VFC<Props> = ({ title }) => {
+export const CustomLabel: VFC<Props> = memo(({ title }) => {
   return <label className="text-gray-500">{title}</label>
-}
+})

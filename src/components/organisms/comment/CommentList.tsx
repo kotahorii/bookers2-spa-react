@@ -1,7 +1,8 @@
 import { useBooks } from 'hooks/useBooks'
+import { memo } from 'react'
 import { CommentForm } from './CommentForm'
 
-export const CommentList = () => {
+export const CommentList = memo(() => {
   const { booksComments } = useBooks()
   return (
     <>
@@ -18,4 +19,4 @@ export const CommentList = () => {
       <CommentForm />
     </>
   )
-}
+})

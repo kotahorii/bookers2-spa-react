@@ -1,8 +1,9 @@
 import { CustomInput } from 'components/atom/CustomInput'
 import { CustomLabel } from 'components/atom/CustomLabel'
 import { useAuth } from 'hooks/useAuth'
+import { memo } from 'react'
 
-export const LoginForm = () => {
+export const LoginForm = memo(() => {
   const { changeAuthData, authData } = useAuth()
   return (
     <>
@@ -23,4 +24,4 @@ export const LoginForm = () => {
       />
     </>
   )
-}
+})

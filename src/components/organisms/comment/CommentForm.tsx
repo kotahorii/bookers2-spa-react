@@ -5,8 +5,9 @@ import { HeartIcon as SolidLike } from '@heroicons/react/solid'
 import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
 import { useCommentMutation } from 'hooks/queries/useCommentMutation'
 import { CustomRateInput } from './CustomRateInput'
+import { memo } from 'react'
 
-export const CommentForm = () => {
+export const CommentForm = memo(() => {
   const {
     comment,
     commentChange,
@@ -54,4 +55,4 @@ export const CommentForm = () => {
       </div>
     </form>
   )
-}
+})

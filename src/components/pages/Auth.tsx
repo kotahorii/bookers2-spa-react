@@ -3,8 +3,9 @@ import { SwitchVerticalIcon } from '@heroicons/react/solid'
 import { LoginForm } from 'components/organisms/auth/LoginForm'
 import { SignUpForm } from 'components/organisms/auth/SignUpForm'
 import { CustomButton } from 'components/atom/CustomButton'
+import { memo } from 'react'
 
-export const Auth = () => {
+export const Auth = memo(() => {
   const { isLogin, toggleIsLogin, authUser, isValidAuth, isLoadingAuth } =
     useAuth()
   return (
@@ -31,4 +32,4 @@ export const Auth = () => {
       </form>
     </div>
   )
-}
+})

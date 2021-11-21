@@ -1,4 +1,6 @@
-export const LoadingCard = () => {
+import { memo } from 'react'
+
+export const LoadingCard = memo(() => {
   return (
     <div className="flex flex-col m-2 cursor-pointer px-2 py-2 shadow-md rounded-lg space-y-3">
       <div className="animate-pulse flex flex-col space-y-1">
@@ -10,4 +12,4 @@ export const LoadingCard = () => {
       </div>
     </div>
   )
-}
+})

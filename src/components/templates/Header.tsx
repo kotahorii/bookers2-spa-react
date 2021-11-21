@@ -1,9 +1,10 @@
 import { Menu } from '@headlessui/react'
 import { CustomUserIcon } from 'components/molecules/CustomUserIcon'
 import { useBooks } from 'hooks/useBooks'
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
-export const Header = () => {
+export const Header = memo(() => {
   const { currentUser } = useBooks()
   return (
     <nav className=" flex flex-row justify-between items-center px-3 w-screen h-20 text-white bg-blue-400">
@@ -28,4 +29,4 @@ export const Header = () => {
       <div className="md:hidden block"></div>
     </nav>
   )
-}
+})
