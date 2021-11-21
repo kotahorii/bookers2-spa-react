@@ -34,7 +34,7 @@ export const EditUserText = () => {
         <ImageInput onChange={imageChange} />
         <ImagePreview preview={preview} resetPreview={resetPreview} />
       </div>
-      <CustomButton type="submit" text="Update" />
+      <CustomButton disabled={!authData.name} type="submit" text="Update" />
     </form>
   )
 }

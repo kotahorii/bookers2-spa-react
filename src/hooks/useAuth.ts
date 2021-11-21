@@ -105,6 +105,19 @@ export const useAuth = () => {
     [currentUser, createEditFormData, updateUserMutation, dispatch]
   )
 
+  const isValidAuth = useCallback(() => {
+    return isLogin
+      ? !authData.email || authData.password.length < 6
+      : !authData.name ||
+          !authData.email ||
+          authData.password.length < 6 ||
+          authData.passwordConfirmation.length < 6
+  }, [isLogin, authData])
+
+  const isLoadingAuth = useCallback(() => {
+    return isLogin ? signInMutate.isLoading : signUpMutate.isLoading
+  }, [isLogin, signInMutate.isLoading, signUpMutate.isLoading])
+
   return {
     isLogin,
     toggleIsLogin,
@@ -116,5 +129,7 @@ export const useAuth = () => {
     imageChange,
     resetPreview,
     updateUser,
+    isValidAuth,
+    isLoadingAuth,
   }
 }

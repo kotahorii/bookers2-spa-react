@@ -5,7 +5,8 @@ import { SignUpForm } from 'components/organisms/auth/SignUpForm'
 import { CustomButton } from 'components/atom/CustomButton'
 
 export const Auth = () => {
-  const { isLogin, toggleIsLogin, authUser } = useAuth()
+  const { isLogin, toggleIsLogin, authUser, isValidAuth, isLoadingAuth } =
+    useAuth()
   return (
     <div className="flex flex-col justify-center items-center bg-gray-100 min-h-screen w-screen">
       <form
@@ -15,7 +16,12 @@ export const Auth = () => {
         {isLogin ? <LoginForm /> : <SignUpForm />}
         <div className="flex flex-row w-full mt-5 space-x-3 items-center justify-center">
           <div className="flex flex-row space-x-5 justify-center items-center w-full">
-            <CustomButton type="submit" text={isLogin ? 'Login' : 'Register'} />
+            <CustomButton
+              disabled={isValidAuth()}
+              type="submit"
+              text={isLogin ? 'Login' : 'Register'}
+              loading={isLoadingAuth()}
+            />
             <SwitchVerticalIcon
               className="w-6 text-blue-500 hover:text-blue-600 cursor-pointer"
               onClick={toggleIsLogin}
