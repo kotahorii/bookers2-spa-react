@@ -1,4 +1,5 @@
 import { BookCard } from 'components/organisms/card/BookCard'
+import { LoadingCard } from 'components/organisms/card/LoadingCard'
 import { CustomModal } from 'components/organisms/modal/CustomModal'
 import { DetailBookText } from 'components/organisms/modal/DetailBookText'
 import { Layout } from 'components/templates/Layout'
@@ -13,7 +14,16 @@ export const Main = () => {
     isLoadingUser,
     isLoadingBooks,
   } = useBooks()
-  if (isLoadingBooks || isLoadingUser) return null
+  if (isLoadingBooks || isLoadingUser)
+    return (
+      <Layout>
+        {[...Array(10)]
+          .map((_, i) => i)
+          ?.map((i) => (
+            <LoadingCard key={i} />
+          ))}
+      </Layout>
+    )
   return (
     <Layout>
       <div className="md:flex md:flex-wrap items-start block md:space-x-5 space-y-3">
