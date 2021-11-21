@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { useCallback } from 'react'
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
 import {
   selectDetailBook,
   selectIsOpenDetailBookModal,
@@ -7,10 +7,12 @@ import {
 } from 'slices/bookSlice'
 import { useLikeMutation } from './queries/useLikeMutation'
 import { useQueryBooks } from './queries/useQueryBooks'
+import { useQueryComments } from './queries/useQueryComments'
 import { useQueryUser } from './queries/useQueryCurrentUser'
 import { useQueryFavorites } from './queries/useQueryFavarites'
 
 export const useBooks = () => {
+  const [comment, setComment] = useState('')
   const dispatch = useAppDispatch()
   const isOpenDetailBook = useAppSelector(selectIsOpenDetailBookModal)
   const { data: currentUser, isLoading: isLoadingUser } = useQueryUser()
@@ -18,6 +20,16 @@ export const useBooks = () => {
   const detailBook = useAppSelector(selectDetailBook)
   const { createLikeMutation, deleteLikeMutation } = useLikeMutation()
   const { data: favorites } = useQueryFavorites()
+  const { data: comments } = useQueryComments()
+
+  const commentChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => setComment(e.target.value),
+    []
+  )
+
+  const submitComment = useCallback((e: FormEvent<HTMLFormElement>) => {
+    
+  }, [])
 
   const closeDetailBook = useCallback(() => {
     dispatch(setIsOpenDetailBookModal(false))
@@ -26,6 +38,11 @@ export const useBooks = () => {
   const booksFavorites = useCallback(
     () => favorites?.filter((fav) => fav.bookId === detailBook.id),
     [detailBook, favorites]
+  )
+
+  const booksComments = useCallback(
+    () => comments?.filter((comment) => comment.bookId === detailBook.id),
+    [comments, detailBook.id]
   )
 
   const isLiked = useCallback(() => {
@@ -57,6 +74,7 @@ export const useBooks = () => {
 
   return {
     booksFavorites,
+    booksComments,
     books,
     detailBook,
     currentUser,
