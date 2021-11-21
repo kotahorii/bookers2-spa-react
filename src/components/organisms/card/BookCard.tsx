@@ -13,12 +13,12 @@ export const BookCard: VFC<Props> = ({ book }) => {
     useBooks()
 
   return (
-    <div className="flex flex-col cursor-pointer px-2 py-2 shadow-md hover:shadow-lg rounded-lg space-y-3">
+    <div className="flex flex-col m-2 cursor-pointer px-2 py-2 shadow-md hover:shadow-lg rounded-lg space-y-3">
       <div onClick={openDetailBook(book)}>
         <div className="w-48 h-36 bg-gray-300 rounded-lg"></div>
         <p className="text-lg text-center">{book.title}</p>
       </div>
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center px-2">
         <div className="flex flex-row items-center">
           {isLiked(book) ? (
             <SolidLike

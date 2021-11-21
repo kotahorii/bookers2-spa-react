@@ -18,16 +18,18 @@ export const Main = () => {
   if (isLoadingBooks || isLoadingUser || isLoadingRates)
     return (
       <Layout>
-        {[...Array(10)]
-          .map((_, i) => i)
-          ?.map((i) => (
-            <LoadingCard key={i} />
-          ))}
+        <div className="md:flex md:flex-wrap md:items-center items-start justify-center block">
+          {[...Array(18)]
+            .map((_, i) => i)
+            ?.map((i) => (
+              <LoadingCard key={i} />
+            ))}
+        </div>
       </Layout>
     )
   return (
     <Layout>
-      <div className="md:flex md:flex-wrap items-start block md:space-x-5 space-y-3">
+      <div className="md:flex md:flex-wrap md:items-center items-start justify-center block">
         {books?.map((book) => (
           <BookCard key={book.id} book={book} />
         ))}

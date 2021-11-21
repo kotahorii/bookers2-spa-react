@@ -1,15 +1,12 @@
 export const LoadingCard = () => {
   return (
-    <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
-      <div className="animate-pulse flex space-x-4">
-        <div className="rounded-full bg-blue-400 h-12 w-12"></div>
-        <div className="flex-1 space-y-4 py-1">
-          <div className="h-4 bg-blue-400 rounded w-3/4"></div>
-          <div className="space-y-2">
-            <div className="h-4 bg-blue-400 rounded"></div>
-            <div className="h-4 bg-blue-400 rounded w-5/6"></div>
-          </div>
-        </div>
+    <div className="flex flex-col m-2 cursor-pointer px-2 py-2 shadow-md rounded-lg space-y-3">
+      <div className="animate-pulse flex flex-col space-y-1">
+        <div className="w-48 h-36 bg-gray-300 rounded-lg"></div>
+        <div className=" bg-gray-300 h-6 w-full rounded-lg"></div>
+      </div>
+      <div className="flex flex-row justify-between items-center px-2">
+        <div className="w-full h-8"></div>
       </div>
     </div>
   )
