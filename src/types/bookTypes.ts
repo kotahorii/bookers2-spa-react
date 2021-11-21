@@ -50,8 +50,8 @@ export type DeleteFavorite = CreateFavorite & { id: number }
 
 export type Rate = {
   rate: number
-  book_id: number
-  user_id: number
+  bookId: number
+  userId: number
   id: number
   created_at: string
   updated_at: string

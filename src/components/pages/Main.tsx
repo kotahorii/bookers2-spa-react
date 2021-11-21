@@ -13,8 +13,9 @@ export const Main = () => {
     detailBook,
     isLoadingUser,
     isLoadingBooks,
+    isLoadingRates,
   } = useBooks()
-  if (isLoadingBooks || isLoadingUser)
+  if (isLoadingBooks || isLoadingUser || isLoadingRates)
     return (
       <Layout>
         {[...Array(10)]
