@@ -1,4 +1,3 @@
-import { CustomArea } from 'components/atom/CustomArea'
 import { CustomButton } from 'components/atom/CustomButton'
 import { CustomInput } from 'components/atom/CustomInput'
 import { CustomLabel } from 'components/atom/CustomLabel'

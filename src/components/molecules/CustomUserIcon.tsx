@@ -10,7 +10,7 @@ type Props = {
 export const CustomUserIcon: VFC<Props> = memo(({ user, width = 'w-16' }) => {
   return user?.image.url ? (
     <img
-      className={`${width} rounded-full`}
+      className={`${width} object-cover h-16 w-16 rounded-full`}
       alt="avatar"
       src={user?.image.url}
     />

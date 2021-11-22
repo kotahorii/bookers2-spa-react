@@ -1,13 +1,11 @@
 import { CustomInput } from 'components/atom/CustomInput'
 import { CustomLabel } from 'components/atom/CustomLabel'
 import { ImageInput } from 'components/molecules/ImageInput'
-import { ImagePreview } from 'components/molecules/ImagePreview'
 import { useAuth } from 'hooks/useAuth'
 import { memo } from 'react'
 
 export const SignUpForm = memo(() => {
-  const { authData, changeAuthData, imageChange, preview, resetPreview } =
-    useAuth()
+  const { authData, changeAuthData } = useAuth()
   return (
     <div className="flex md:flex-row flex-col items-start md:space-x-5">
       <div className="flex flex-col">

@@ -55,7 +55,7 @@ export const useAuth = () => {
     [uploadImage, previewImage]
   )
 
-  const resetPreview = useCallback(() => dispatch(setPreview('')), [])
+  const resetPreview = useCallback(() => dispatch(setPreview('')), [dispatch])
 
   const createFormData = useCallback((): SignUpFormData => {
     const formData = new FormData()
