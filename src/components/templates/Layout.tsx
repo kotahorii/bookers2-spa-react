@@ -9,13 +9,20 @@ import { Header } from 'components/templates/Header'
 import { useBooks } from 'hooks/useBooks'
 import { useHeader } from 'hooks/useHeader'
 import { useMyPage } from 'hooks/useMyPage'
-import { VFC, ReactNode, memo } from 'react'
+import { VFC, ReactNode, memo, useEffect } from 'react'
 
 type Props = {
   children: ReactNode
 }
 
 export const Layout: VFC<Props> = memo(({ children }) => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
+
   const {
     isOpenEditUserModal,
     closeEditedUserModal,
@@ -26,34 +33,34 @@ export const Layout: VFC<Props> = memo(({ children }) => {
   const { isOpenDeleteBookModal, closeDeleteBookModal } = useMyPage()
   return (
     <Menu>
-      <div className="flex flex-col items-center min-h-screen bg-gray-100 text-gray-500 text-sm font-mono">
+      <div className="flex flex-col relative items-center text-gray-500 text-sm font-mono">
         <Header />
-        <main className="flex flex-1 flex-col justify-start items-center py-5 w-screen">
+        <main className="flex flex-1 flex-col absolute top-20 justify-start items-center py-5 w-screen">
           {children}
           <CustomMenu />
-          <CustomModal
-            title="Edit user"
-            isOpen={isOpenEditUserModal}
-            closeModal={closeEditedUserModal}
-          >
-            <EditUserText />
-          </CustomModal>
-          <CustomModal
-            title="Create Book"
-            isOpen={isOpenBookModal}
-            closeModal={closeCreateBookModal}
-          >
-            <CreateOrEditBook />
-          </CustomModal>
-          <CustomModal
-            isOpen={isOpenDeleteBookModal}
-            closeModal={closeDeleteBookModal}
-            title={detailBook.title}
-          >
-            <DeleteBookModal />
-          </CustomModal>
-          <SuccessToast />
         </main>
+        <CustomModal
+          title="Edit user"
+          isOpen={isOpenEditUserModal}
+          closeModal={closeEditedUserModal}
+        >
+          <EditUserText />
+        </CustomModal>
+        <CustomModal
+          title="Create Book"
+          isOpen={isOpenBookModal}
+          closeModal={closeCreateBookModal}
+        >
+          <CreateOrEditBook />
+        </CustomModal>
+        <CustomModal
+          isOpen={isOpenDeleteBookModal}
+          closeModal={closeDeleteBookModal}
+          title={detailBook.title}
+        >
+          <DeleteBookModal />
+        </CustomModal>
+        <SuccessToast />
       </div>
     </Menu>
   )

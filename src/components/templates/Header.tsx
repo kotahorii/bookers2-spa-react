@@ -5,13 +5,25 @@ import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 export const Header = memo(() => {
+  const pageTopButton = document.querySelector('#page-top')
+  pageTopButton?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  })
   const { currentUser } = useBooks()
   return (
-    <nav className=" flex flex-row justify-between items-center px-3 w-screen h-20 text-white bg-blue-400">
+    <nav className=" flex flex-row z-10 fixed justify-between items-center px-3 w-screen h-20 text-white bg-blue-400">
       <Menu.Button>
         <CustomUserIcon user={currentUser} width="w-12" />
       </Menu.Button>
-      <div className="text-3xl">Bookers</div>
+      <div
+        id="page-top"
+        className="text-3xl hover:text-blue-200 cursor-pointer"
+      >
+        Bookers
+      </div>
       <div className="md:flex hidden flex-row space-x-3">
         <Link
           to="/main"
