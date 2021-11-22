@@ -3,6 +3,7 @@ import client from 'lib/client'
 import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router'
 import { ResAuthUser, SignInData, SignUpFormData, User } from 'types/userTypes'
+import { toast } from 'react-toastify'
 
 export const useMutationAuth = () => {
   const navigate = useNavigate()
@@ -18,6 +19,9 @@ export const useMutationAuth = () => {
         Cookies.set('_uid', res.headers['uid'])
         navigate('/main')
       },
+      onError: () => {
+        toast.error('Login Failed')
+      },
     }
   )
 
@@ -30,6 +34,9 @@ export const useMutationAuth = () => {
         Cookies.set('_client', res.headers['client'])
         Cookies.set('_uid', res.headers['uid'])
         navigate('/main')
+      },
+      onError: () => {
+        toast.error('Sign up Failed')
       },
     }
   )

@@ -4,6 +4,7 @@ import { LoginForm } from 'components/organisms/auth/LoginForm'
 import { SignUpForm } from 'components/organisms/auth/SignUpForm'
 import { CustomButton } from 'components/atom/CustomButton'
 import { memo } from 'react'
+import { SuccessToast } from 'components/molecules/SuccessToast'
 
 export const Auth = memo(() => {
   const { isLogin, toggleIsLogin, authUser, isValidAuth, isLoadingAuth } =
@@ -30,6 +31,7 @@ export const Auth = memo(() => {
           </div>
         </div>
       </form>
+      <SuccessToast />
     </div>
   )
 })
