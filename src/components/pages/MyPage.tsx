@@ -1,7 +1,8 @@
-import { CustomButton } from 'components/atom/CustomButton'
 import { BookCard } from 'components/organisms/card/BookCard'
 import { LoadingCard } from 'components/organisms/card/LoadingCard'
+import { MyBookCard } from 'components/organisms/card/MyBookCard'
 import { CustomModal } from 'components/organisms/modal/CustomModal'
+import { DeleteBookModal } from 'components/organisms/modal/DeleteBookModal'
 import { DetailBookText } from 'components/organisms/modal/DetailBookText'
 import { Layout } from 'components/templates/Layout'
 import { useBooks } from 'hooks/useBooks'
@@ -17,7 +18,14 @@ export const MyPage = memo(() => {
     isLoadingBooks,
     isLoadingRates,
   } = useBooks()
-  const { myBook, likedBook, changeBooksMode, booksMode } = useMyPage()
+  const {
+    myBook,
+    likedBook,
+    changeBooksMode,
+    booksMode,
+    isOpenDeleteBookModal,
+    closeDeleteBookModal,
+  } = useMyPage()
   if (isLoadingBooks || isLoadingUser || isLoadingRates)
     return (
       <Layout>
@@ -32,16 +40,26 @@ export const MyPage = memo(() => {
     )
   return (
     <Layout>
-      <div className="flex flex-row space-x-3">
-        <button onClick={changeBooksMode('myBooks')}>my books</button>
-        <button onClick={changeBooksMode('likedBooks')}>liked books</button>
+      <div className="flex flex-row space-x-1">
+        <button
+          className="hover:bg-gray-200 p-2 rounded-lg"
+          onClick={changeBooksMode('myBooks')}
+        >
+          my books
+        </button>
+        <button
+          className="hover:bg-gray-200 p-2 rounded-lg"
+          onClick={changeBooksMode('likedBooks')}
+        >
+          liked books
+        </button>
       </div>
 
       <div className="md:flex md:flex-wrap md:items-center justify-center block">
         {booksMode === 'likedBooks' &&
           likedBook()?.map((book) => <BookCard key={book.id} book={book} />)}
         {booksMode === 'myBooks' &&
-          myBook()?.map((book) => <BookCard key={book.id} book={book} />)}
+          myBook()?.map((book) => <MyBookCard key={book.id} book={book} />)}
       </div>
       <CustomModal
         title={detailBook.title}
@@ -49,6 +67,13 @@ export const MyPage = memo(() => {
         closeModal={closeDetailBook}
       >
         <DetailBookText />
+      </CustomModal>
+      <CustomModal
+        isOpen={isOpenDeleteBookModal}
+        closeModal={closeDeleteBookModal}
+        title={detailBook.title}
+      >
+        <DeleteBookModal />
       </CustomModal>
     </Layout>
   )

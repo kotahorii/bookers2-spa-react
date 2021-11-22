@@ -11,7 +11,7 @@ const ImagePreviewMemo: VFC<Props> = ({ preview, resetPreview }) => {
     <div className="relative w-28 h-28 px-2 py-2 ">
       <XCircleIcon
         onClick={resetPreview}
-        className="absolute right-2 top-2 cursor-pointer w-7 text-gray-400"
+        className="absolute right-2 top-2 cursor-pointer w-7 text-gray-300 hover:text-gray-400"
       />
       <img
         src={preview}

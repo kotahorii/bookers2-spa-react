@@ -43,7 +43,7 @@ export const useMutateBooks = () => {
     }
   )
   const deleteBookMutation = useMutation(
-    (id: number) => client.delete(`books/id`),
+    (id: number) => client.delete(`books/${id}`),
     {
       onSuccess: (res, variable) => {
         const previousBooks = queryClient.getQueryData<Book[]>('books')

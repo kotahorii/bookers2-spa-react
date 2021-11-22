@@ -7,6 +7,7 @@ type stateType = {
   detailBook: Book
   isOpenDetailBookModal: boolean
   isOpenBookModal: boolean
+  isOpenDeleteBookModal: boolean
 }
 
 const initialState: stateType = {
@@ -24,6 +25,7 @@ const initialState: stateType = {
   },
   isOpenDetailBookModal: false,
   isOpenBookModal: false,
+  isOpenDeleteBookModal: false,
 }
 
 export const bookSlice = createSlice({
@@ -49,11 +51,15 @@ export const bookSlice = createSlice({
     setIsOpenBookModal: (state, action: PayloadAction<boolean>) => {
       state.isOpenBookModal = action.payload
     },
+    setIsOpenDeleteBookModal: (state, action) => {
+      state.isOpenDeleteBookModal = action.payload
+    },
   },
 })
 
 export const {
   setIsOpenDetailBookModal,
+  setIsOpenDeleteBookModal,
   setIsOpenBookModal,
   setEditedBook,
   resetEditedBook,
@@ -66,4 +72,6 @@ export const selectIsOpenBookModal = (state: RootState) =>
   state.book.isOpenBookModal
 export const selectEditedBook = (state: RootState) => state.book.editedBook
 export const selectDetailBook = (state: RootState) => state.book.detailBook
+export const selectIsOpenDeleteBook = (state: RootState) =>
+  state.book.isOpenDeleteBookModal
 export default bookSlice.reducer
