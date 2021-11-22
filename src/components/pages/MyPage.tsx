@@ -7,6 +7,7 @@ import { DetailBookText } from 'components/organisms/modal/DetailBookText'
 import { Layout } from 'components/templates/Layout'
 import { useBooks } from 'hooks/useBooks'
 import { useMyPage } from 'hooks/useMyPage'
+import { useRates } from 'hooks/useRates'
 import { memo } from 'react'
 
 export const MyPage = memo(() => {
@@ -16,8 +17,8 @@ export const MyPage = memo(() => {
     detailBook,
     isLoadingUser,
     isLoadingBooks,
-    isLoadingRates,
   } = useBooks()
+  const { isLoadingRates } = useRates()
   const {
     myBook,
     likedBook,

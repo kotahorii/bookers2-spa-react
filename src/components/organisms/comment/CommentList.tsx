@@ -1,9 +1,9 @@
-import { useBooks } from 'hooks/useBooks'
+import { useComments } from 'hooks/useComments'
 import { memo } from 'react'
 import { CommentForm } from './CommentForm'
 
 export const CommentList = memo(() => {
-  const { booksComments } = useBooks()
+  const { booksComments } = useComments()
   return (
     <>
       <div className="overflow-auto mt-5 px-3 py-1 bg-gray-200 rounded-lg w-96 h-64">

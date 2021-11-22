@@ -1,9 +1,7 @@
-import { UserCircleIcon } from '@heroicons/react/solid'
 import { Spinner } from 'components/atom/Spinner'
 import { useQueryUser } from 'hooks/queries/useQueryCurrentUser'
 import { memo, VFC } from 'react'
 import { Navigate } from 'react-router'
-import { Link } from 'react-router-dom'
 
 type Props = {
   children: JSX.Element

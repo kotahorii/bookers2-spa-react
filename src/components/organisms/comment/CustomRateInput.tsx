@@ -1,10 +1,10 @@
 import { StarIcon as SolidStar } from '@heroicons/react/solid'
 import { StarIcon as OutLineStar } from '@heroicons/react/outline'
-import { useBooks } from 'hooks/useBooks'
 import { memo } from 'react'
+import { useRates } from 'hooks/useRates'
 
 export const CustomRateInput = memo(() => {
-  const { rate, rateCreate, rateUpdate } = useBooks()
+  const { rate, rateCreate, rateUpdate } = useRates()
   return (
     <div className="flex flex-row">
       {rate === undefined ? (

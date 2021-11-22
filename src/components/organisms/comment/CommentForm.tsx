@@ -1,23 +1,17 @@
 import { CustomArea } from 'components/atom/CustomArea'
 import { CustomButton } from 'components/atom/CustomButton'
 import { useBooks } from 'hooks/useBooks'
-import { HeartIcon as SolidLike } from '@heroicons/react/solid'
-import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
 import { CustomRateInput } from './CustomRateInput'
 import { memo } from 'react'
+import { LikeButton } from 'components/atom/LikeButton'
+import { useComments } from 'hooks/useComments'
+import { useLikes } from 'hooks/useLikes'
 
 export const CommentForm = memo(() => {
-  const {
-    comment,
-    commentChange,
-    submitComment,
-    isLiked,
-    toggleLike,
-    booksFavorites,
-    createCommentMutation,
-    detailBook,
-  } = useBooks()
-
+  const { detailBook } = useBooks()
+  const { booksFavorites } = useLikes()
+  const { commentChange, submitComment, comment, createCommentMutation } =
+    useComments()
   return (
     <form
       onSubmit={submitComment}
@@ -30,17 +24,7 @@ export const CommentForm = memo(() => {
       />
       <div className="flex flex-row w-full items-center justify-between">
         <div className="flex flex-row items-center">
-          {isLiked(detailBook) ? (
-            <SolidLike
-              onClick={toggleLike(detailBook)}
-              className="w-8 p-1 text-red-400 rounded-full hover:bg-gray-200 cursor-pointer"
-            />
-          ) : (
-            <OutLineLike
-              onClick={toggleLike(detailBook)}
-              className="w-8 p-1 text-gray-400 rounded-full hover:bg-gray-200 cursor-pointer"
-            />
-          )}
+          <LikeButton book={detailBook} />
           <span>{booksFavorites(detailBook)?.length}</span>
         </div>
         <CustomRateInput />

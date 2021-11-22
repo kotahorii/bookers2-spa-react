@@ -1,18 +1,21 @@
 import { useBooks } from 'hooks/useBooks'
 import { memo, VFC } from 'react'
 import { Book } from 'types/bookTypes'
-import { HeartIcon as SolidLike, XCircleIcon } from '@heroicons/react/solid'
-import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/solid'
 import { RateAverage } from '../comment/RateAverage'
 import { useMyPage } from 'hooks/useMyPage'
+import { LikeButton } from 'components/atom/LikeButton'
+import { useRates } from 'hooks/useRates'
+import { useLikes } from 'hooks/useLikes'
 
 type Props = {
   book: Book
 }
 
 export const MyBookCard: VFC<Props> = memo(({ book }) => {
-  const { averageRate, isLiked, toggleLike, booksFavorites, openDetailBook } =
-    useBooks()
+  const { openDetailBook } = useBooks()
+  const { averageRate } = useRates()
+  const { booksFavorites } = useLikes()
   const { openDeleteBookModal } = useMyPage()
 
   return (
@@ -27,17 +30,7 @@ export const MyBookCard: VFC<Props> = memo(({ book }) => {
       </div>
       <div className="flex flex-row justify-between items-center px-2">
         <div className="flex flex-row items-center">
-          {isLiked(book) ? (
-            <SolidLike
-              onClick={toggleLike(book)}
-              className="w-8 p-1 text-red-400 rounded-full hover:bg-gray-200 cursor-pointer"
-            />
-          ) : (
-            <OutLineLike
-              onClick={toggleLike(book)}
-              className="w-8 p-1 text-gray-400 rounded-full hover:bg-gray-200 cursor-pointer"
-            />
-          )}
+          <LikeButton book={book} />
           <span>{booksFavorites(book)?.length}</span>
         </div>
         <div className="flex flex-row">

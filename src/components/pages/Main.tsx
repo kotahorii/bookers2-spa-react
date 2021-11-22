@@ -4,6 +4,7 @@ import { CustomModal } from 'components/organisms/modal/CustomModal'
 import { DetailBookText } from 'components/organisms/modal/DetailBookText'
 import { Layout } from 'components/templates/Layout'
 import { useBooks } from 'hooks/useBooks'
+import { useRates } from 'hooks/useRates'
 import { memo } from 'react'
 
 export const Main = memo(() => {
@@ -14,8 +15,9 @@ export const Main = memo(() => {
     detailBook,
     isLoadingUser,
     isLoadingBooks,
-    isLoadingRates,
   } = useBooks()
+
+  const { isLoadingRates } = useRates()
   if (isLoadingBooks || isLoadingUser || isLoadingRates)
     return (
       <Layout>

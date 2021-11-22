@@ -1,14 +1,14 @@
 import { StarIcon as SolidStar } from '@heroicons/react/solid'
 import { StarIcon as OutLineStar } from '@heroicons/react/outline'
-import { useBooks } from 'hooks/useBooks'
 import { Book } from 'types/bookTypes'
 import { memo, VFC } from 'react'
+import { useRates } from 'hooks/useRates'
 
 type Props = {
   book: Book
 }
 export const RateAverage: VFC<Props> = memo(({ book }) => {
-  const { averageRate } = useBooks()
+  const { averageRate } = useRates()
   const roundedRate =
     averageRate(book) && Math.round(averageRate(book) as number)
 
