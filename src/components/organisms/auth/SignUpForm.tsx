@@ -53,8 +53,7 @@ export const SignUpForm = memo(() => {
           onChange={changeAuthData}
         />
         <div className="flex flex-row justify-center space-x-3">
-          <ImageInput onChange={imageChange} />
-          <ImagePreview preview={preview} resetPreview={resetPreview} />
+          <ImageInput />
         </div>
       </div>
     </div>

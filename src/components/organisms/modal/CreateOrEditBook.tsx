@@ -9,7 +9,7 @@ export const CreateOrEditBook = memo(() => {
   const { changeBook, editedBook, submitBook } = useHeader()
   return (
     <>
-      <form onSubmit={submitBook} className="mt-2 flex flex-col">
+      <form onSubmit={submitBook} className=" w-72 mt-2 flex flex-col">
         <CustomLabel title="Title:" />
         <CustomInput
           name="title"

@@ -6,6 +6,7 @@ type stateType = {
   authData: SignUpData & { id: number }
   detailUser: User
   isOpenEditUserModal: boolean
+  preview: string
 }
 
 const initialState: stateType = {
@@ -29,6 +30,7 @@ const initialState: stateType = {
     introduction: '',
   },
   isOpenEditUserModal: false,
+  preview: '',
 }
 
 export const authSlice = createSlice({
@@ -51,6 +53,9 @@ export const authSlice = createSlice({
     setIsOpenEditUserModal: (state, action: PayloadAction<boolean>) => {
       state.isOpenEditUserModal = action.payload
     },
+    setPreview: (state, action: PayloadAction<string>) => {
+      state.preview = action.payload
+    },
   },
 })
 
@@ -59,10 +64,12 @@ export const {
   setDetailUser,
   resetDetailUser,
   setIsOpenEditUserModal,
+  setPreview,
 } = authSlice.actions
 
 export const selectIsOpenEditUserModal = (state: RootState) =>
   state.auth.isOpenEditUserModal
 export const selectAuthData = (state: RootState) => state.auth.authData
 export const selectDetailUser = (state: RootState) => state.auth.detailUser
+export const selectPreview = (state: RootState) => state.auth.preview
 export default authSlice.reducer

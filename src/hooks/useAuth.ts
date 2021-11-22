@@ -1,8 +1,10 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import {
   selectAuthData,
+  selectPreview,
   setAuthData,
   setIsOpenEditUserModal,
+  setPreview,
 } from 'slices/authSlice'
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
 import { SignUpFormData, UpdateUserFormData } from 'types/userTypes'
@@ -12,12 +14,12 @@ import { useMutationUsers } from './queries/useMutationUsers'
 
 export const useAuth = () => {
   const dispatch = useAppDispatch()
+  const preview = useAppSelector(selectPreview)
   const authData = useAppSelector(selectAuthData)
   const [isLogin, setIsLogin] = useState(true)
   const { data: currentUser } = useQueryUser()
   const { updateUserMutation } = useMutationUsers()
 
-  const [preview, setPreview] = useState('')
   const { signInMutate, signUpMutate, signOutMutate } = useMutationAuth()
 
   const changeAuthData = useCallback(
@@ -37,10 +39,13 @@ export const useAuth = () => {
     [dispatch, authData]
   )
 
-  const previewImage = useCallback((e) => {
-    const file = e.target.files[0] as string
-    setPreview(window.URL.createObjectURL(file))
-  }, [])
+  const previewImage = useCallback(
+    (e) => {
+      const file = e.target.files[0] as string
+      dispatch(setPreview(window.URL.createObjectURL(file)))
+    },
+    [dispatch]
+  )
 
   const imageChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +55,7 @@ export const useAuth = () => {
     [uploadImage, previewImage]
   )
 
-  const resetPreview = useCallback(() => setPreview(''), [])
+  const resetPreview = useCallback(() => dispatch(setPreview('')), [])
 
   const createFormData = useCallback((): SignUpFormData => {
     const formData = new FormData()

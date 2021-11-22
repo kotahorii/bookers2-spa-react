@@ -16,7 +16,7 @@ export const EditUserText = memo(() => {
     updateUser,
   } = useAuth()
   return (
-    <form onSubmit={updateUser} className="mt-2 flex flex-col">
+    <form onSubmit={updateUser} className="w-72 mt-2 flex flex-col">
       <CustomLabel title="Name:" />
       <CustomInput
         name="name"
@@ -32,8 +32,7 @@ export const EditUserText = memo(() => {
         onChange={changeAuthData}
       />
       <div className="flex-row flex w-full items-center space-x-5">
-        <ImageInput onChange={imageChange} />
-        <ImagePreview preview={preview} resetPreview={resetPreview} />
+        <ImageInput />
       </div>
       <CustomButton disabled={!authData.name} type="submit" text="Update" />
     </form>
