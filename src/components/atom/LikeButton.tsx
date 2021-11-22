@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { memo, VFC } from 'react'
 import { Book } from 'types/bookTypes'
 import { HeartIcon as SolidLike } from '@heroicons/react/solid'
 import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
@@ -8,7 +8,7 @@ type Props = {
   book: Book
 }
 
-export const LikeButton: VFC<Props> = ({ book }) => {
+export const LikeButton: VFC<Props> = memo(({ book }) => {
   const { isLiked, toggleLike } = useLikes()
   return (
     <>
@@ -25,4 +25,4 @@ export const LikeButton: VFC<Props> = ({ book }) => {
       )}
     </>
   )
-}
+})

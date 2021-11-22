@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
 import { useCommentMutation } from './queries/useCommentMutation'
 import { useQueryComments } from './queries/useQueryComments'
 import { useBooks } from './useBooks'
+import { toast } from 'react-toastify'
 
 export const useComments = () => {
   const { data: comments } = useQueryComments()
@@ -18,6 +19,7 @@ export const useComments = () => {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       createCommentMutation.mutate({ bookId: detailBook.id, comment: comment })
+      toast.success('Success to create comments!')
       setComment('')
     },
     [comment, createCommentMutation, detailBook.id]

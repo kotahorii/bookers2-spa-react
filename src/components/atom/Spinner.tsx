@@ -1,4 +1,6 @@
-export const Spinner = () => {
+import { memo } from 'react'
+
+export const Spinner = memo(() => {
   return (
     <svg
       className="animate-spin w-32"
@@ -16,4 +18,4 @@ export const Spinner = () => {
       ></path>
     </svg>
   )
-}
+})

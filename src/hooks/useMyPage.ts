@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { useCallback, useState } from 'react'
+import { toast } from 'react-toastify'
 import {
   selectIsOpenDeleteBook,
   setDetailBook,
@@ -59,6 +60,7 @@ export const useMyPage = () => {
     (id: number) => () => {
       deleteBookMutation.mutate(id)
       closeDeleteBookModal()
+      toast.success('Success to delete book!')
     },
     [deleteBookMutation, closeDeleteBookModal]
   )

@@ -11,6 +11,7 @@ import { SignUpFormData, UpdateUserFormData } from 'types/userTypes'
 import { useMutationAuth } from './queries/useMutationAuth'
 import { useQueryUser } from './queries/useQueryCurrentUser'
 import { useMutationUsers } from './queries/useMutationUsers'
+import { toast } from 'react-toastify'
 
 export const useAuth = () => {
   const dispatch = useAppDispatch()
@@ -106,6 +107,7 @@ export const useAuth = () => {
       }
       updateUserMutation.mutate(data)
       dispatch(setIsOpenEditUserModal(false))
+      toast.success('Success to update user!')
     },
     [currentUser, createEditFormData, updateUserMutation, dispatch]
   )

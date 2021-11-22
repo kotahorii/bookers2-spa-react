@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { ChangeEvent, FormEvent, useCallback } from 'react'
+import { toast } from 'react-toastify'
 import {
   resetEditedBook,
   selectDetailBook,
@@ -10,6 +11,7 @@ import {
   setIsOpenDetailBookModal,
 } from 'slices/bookSlice'
 import { Book } from 'types/bookTypes'
+import { User } from 'types/userTypes'
 import { useMutateBooks } from './queries/useMutateBooks'
 import { useQueryBooks } from './queries/useQueryBooks'
 import { useQueryUser } from './queries/useQueryCurrentUser'
@@ -53,6 +55,7 @@ export const useBooks = () => {
       e.preventDefault()
       if (editedBook.id === 0) {
         createBookMutation.mutate(editedBook)
+        toast.success('Success to create book!')
       } else {
         updateBookMutation.mutate(editedBook)
       }
@@ -68,6 +71,11 @@ export const useBooks = () => {
     ]
   )
 
+  const usersBook = useCallback(
+    (user: User) => books?.filter((book) => book.userId === user.id),
+    [books]
+  )
+
   return {
     books,
     detailBook,
@@ -80,5 +88,6 @@ export const useBooks = () => {
     changeBook,
     submitBook,
     editedBook,
+    usersBook,
   }
 }
