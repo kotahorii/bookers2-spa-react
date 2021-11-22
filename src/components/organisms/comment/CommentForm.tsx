@@ -3,7 +3,6 @@ import { CustomButton } from 'components/atom/CustomButton'
 import { useBooks } from 'hooks/useBooks'
 import { HeartIcon as SolidLike } from '@heroicons/react/solid'
 import { HeartIcon as OutLineLike } from '@heroicons/react/outline'
-import { useCommentMutation } from 'hooks/queries/useCommentMutation'
 import { CustomRateInput } from './CustomRateInput'
 import { memo } from 'react'
 
@@ -15,9 +14,9 @@ export const CommentForm = memo(() => {
     isLiked,
     toggleLike,
     booksFavorites,
+    createCommentMutation,
     detailBook,
   } = useBooks()
-  const { createCommentMutation } = useCommentMutation()
 
   return (
     <form

@@ -44,9 +44,10 @@ export const useBooks = () => {
     [comment, createCommentMutation, detailBook.id]
   )
 
-  const closeDetailBook = useCallback(() => {
-    dispatch(setIsOpenDetailBookModal(false))
-  }, [dispatch])
+  const closeDetailBook = useCallback(
+    () => dispatch(setIsOpenDetailBookModal(false)),
+    [dispatch]
+  )
 
   const booksFavorites = useCallback(
     (book: Book) => favorites?.filter((fav) => fav.bookId === book.id),
@@ -157,5 +158,6 @@ export const useBooks = () => {
     comment,
     commentChange,
     submitComment,
+    createCommentMutation,
   }
 }
