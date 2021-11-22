@@ -106,7 +106,6 @@ export const useBooks = () => {
         .length > 0,
     [booksFavorites, currentUser]
   )
-
   const toggleLike = useCallback(
     (book: Book) => () => {
       if (isLiked(book)) {

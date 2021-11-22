@@ -1,4 +1,4 @@
-import { CommentInput } from 'components/atom/CommentInput'
+import { CustomArea } from 'components/atom/CustomArea'
 import { CustomButton } from 'components/atom/CustomButton'
 import { useBooks } from 'hooks/useBooks'
 import { HeartIcon as SolidLike } from '@heroicons/react/solid'
@@ -23,12 +23,12 @@ export const CommentForm = memo(() => {
       onSubmit={submitComment}
       className="flex flex-col items-end space-y-3 w-full"
     >
-      <CommentInput
+      <CustomArea
         value={comment}
         onChange={commentChange}
         placeholder="Comment"
       />
-      <div className="flex flex-row w-full space-x-3 justify-between">
+      <div className="flex flex-row w-full items-center justify-between">
         <div className="flex flex-row items-center">
           {isLiked(detailBook) ? (
             <SolidLike
@@ -44,13 +44,15 @@ export const CommentForm = memo(() => {
           <span>{booksFavorites(detailBook)?.length}</span>
         </div>
         <CustomRateInput />
-        <div></div>
-        <CustomButton
-          text="Comment"
-          type="submit"
-          disabled={!comment}
-          loading={createCommentMutation.isLoading}
-        />
+        <div className="flex flex-row items-center space-x-2 w-48">
+          <p className="ml-2">{comment.length}/140</p>
+          <CustomButton
+            text="Comment"
+            type="submit"
+            disabled={!comment || comment.length > 140}
+            loading={createCommentMutation.isLoading}
+          />
+        </div>
       </div>
     </form>
   )
