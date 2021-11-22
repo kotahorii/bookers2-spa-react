@@ -20,7 +20,7 @@ export const BookCard: VFC<Props> = memo(({ book }) => {
   const { openDeleteBookModal } = useMyPage()
 
   return (
-    <div className="flex flex-col relative m-2 cursor-pointer px-2 py-2 shadow-md hover:shadow-lg rounded-lg space-y-3">
+    <div className="flex flex-col bg-blue-50 relative m-2 cursor-pointer px-2 py-2 shadow-md hover:shadow-lg rounded-lg space-y-3">
       {book.userId === currentUser?.id && (
         <XCircleIcon
           onClick={openDeleteBookModal(book)}

@@ -28,7 +28,7 @@ export const CustomModal: VFC<Props> = memo(
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Overlay className="fixed inset-0" />
+                <Dialog.Overlay className="fixed bg-gray-500 opacity-50 inset-0" />
               </Transition.Child>
               <span
                 className="inline-block h-screen align-middle"
