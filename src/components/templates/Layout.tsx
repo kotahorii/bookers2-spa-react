@@ -10,6 +10,7 @@ import { useBooks } from 'hooks/useBooks'
 import { useHeader } from 'hooks/useHeader'
 import { useMyPage } from 'hooks/useMyPage'
 import { VFC, ReactNode, memo, useEffect } from 'react'
+import { Footer } from './Footer'
 
 type Props = {
   children: ReactNode
@@ -39,6 +40,8 @@ export const Layout: VFC<Props> = memo(({ children }) => {
           {children}
           <CustomMenu />
         </main>
+        <Footer />
+
         <CustomModal
           title="Edit user"
           isOpen={isOpenEditUserModal}
