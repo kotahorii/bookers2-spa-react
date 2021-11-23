@@ -3,23 +3,17 @@ import {
   selectAuthData,
   selectPreview,
   setAuthData,
-  setIsOpenEditUserModal,
   setPreview,
 } from 'slices/authSlice'
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
-import { SignUpFormData, UpdateUserFormData } from 'types/userTypes'
+import { SignUpFormData } from 'types/userTypes'
 import { useMutationAuth } from './queries/useMutationAuth'
-import { useQueryUser } from './queries/useQueryCurrentUser'
-import { useMutationUsers } from './queries/useMutationUsers'
-import { toast } from 'react-toastify'
 
 export const useAuth = () => {
   const dispatch = useAppDispatch()
   const preview = useAppSelector(selectPreview)
   const authData = useAppSelector(selectAuthData)
   const [isLogin, setIsLogin] = useState(true)
-  const { data: currentUser } = useQueryUser()
-  const { updateUserMutation } = useMutationUsers()
 
   const { signInMutate, signUpMutate, signOutMutate } = useMutationAuth()
 
@@ -90,28 +84,6 @@ export const useAuth = () => {
 
   const signOut = useCallback(() => signOutMutate.mutate(), [signOutMutate])
 
-  const createEditFormData = useCallback((): UpdateUserFormData => {
-    const formData = new FormData()
-    formData.append('name', authData.name || '')
-    formData.append('introduction', authData.introduction || '')
-    formData.append('image', authData.image)
-    return formData
-  }, [authData])
-
-  const updateUser = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault()
-      const data = {
-        id: currentUser?.id,
-        formData: createEditFormData(),
-      }
-      updateUserMutation.mutate(data)
-      dispatch(setIsOpenEditUserModal(false))
-      toast.success('Success to update user!')
-    },
-    [currentUser, createEditFormData, updateUserMutation, dispatch]
-  )
-
   const isValidAuth = useCallback(
     () =>
       isLogin
@@ -138,7 +110,6 @@ export const useAuth = () => {
     preview,
     imageChange,
     resetPreview,
-    updateUser,
     isValidAuth,
     isLoadingAuth,
   }

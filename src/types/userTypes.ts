@@ -46,11 +46,6 @@ export type UpdateUserFormData = FormData & {
   ): any
 }
 
-export type SessionRes = {
-  status: number
-  currentUser: User
-}
-
 export type ResAuthUser = {
   data: User
 }

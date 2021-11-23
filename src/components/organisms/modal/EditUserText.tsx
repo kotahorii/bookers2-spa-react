@@ -3,10 +3,12 @@ import { CustomInput } from 'components/atom/CustomInput'
 import { CustomLabel } from 'components/atom/CustomLabel'
 import { ImageInput } from 'components/molecules/ImageInput'
 import { useAuth } from 'hooks/useAuth'
+import { useUsers } from 'hooks/useUsers'
 import { memo } from 'react'
 
 export const EditUserText = memo(() => {
-  const { authData, changeAuthData, updateUser } = useAuth()
+  const { authData, changeAuthData } = useAuth()
+  const { updateUser } = useUsers()
   return (
     <form onSubmit={updateUser} className="w-72 mt-2 flex flex-col">
       <CustomLabel title="Name:" />
