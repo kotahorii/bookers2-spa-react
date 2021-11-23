@@ -6,7 +6,7 @@ export const CommentList = memo(() => {
   const { booksComments } = useComments()
   return (
     <>
-      <div className="overflow-auto mt-5 px-3 py-1 bg-gray-200 rounded-lg w-96 h-64">
+      <div className="overflow-auto mt-5 px-3 py-1 bg-gray-200 rounded-lg md:w-96 w-72 h-64">
         {booksComments()?.map((comment) => (
           <div
             key={comment.id}

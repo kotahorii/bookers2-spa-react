@@ -15,7 +15,7 @@ export const CommentForm = memo(() => {
   return (
     <form
       onSubmit={submitComment}
-      className="flex flex-col items-end space-y-3 w-full"
+      className="flex flex-col items-end space-y-3 md:w-full w-72"
     >
       <CustomArea
         value={comment}
@@ -28,8 +28,8 @@ export const CommentForm = memo(() => {
           <span>{booksFavorites(detailBook)?.length}</span>
         </div>
         <CustomRateInput />
-        <div className="flex flex-row items-center space-x-2 w-48">
-          <p className="ml-2">{comment.length}/140</p>
+        <div className="flex flex-row items-center md:space-x-2 space-x-1 w-48">
+          <p className="md:ml-2">{comment.length}/140</p>
           <CustomButton
             text="Comment"
             type="submit"

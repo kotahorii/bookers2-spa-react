@@ -7,7 +7,7 @@ import { useRates } from 'hooks/useRates'
 import { memo, VFC } from 'react'
 import { Book } from 'types/bookTypes'
 
-import { RateAverage } from '../comment/RateAverage'
+import { RateAverage } from '../../atom/RateAverage'
 
 type Props = {
   book: Book

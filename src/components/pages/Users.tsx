@@ -36,7 +36,7 @@ export const Users = memo(() => {
       </div>
       <div className="md:flex md:flex-wrap md:items-center mt-3 justify-center block">
         {usersBook(detailUser)?.map((book) => (
-          <BookCard book={book} />
+          <BookCard book={book} key={book.id} />
         ))}
       </div>
       <CustomModal

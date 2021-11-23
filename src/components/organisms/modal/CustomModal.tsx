@@ -45,7 +45,7 @@ export const CustomModal: VFC<Props> = memo(
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <div className="inline-block text-gray-500 bg-gray-50 p-6 my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-lg">
+                <div className="inline-block fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-500 bg-gray-50 p-6 my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-lg">
                   <Dialog.Title
                     as="h3"
                     className="text-lg text-center font-medium leading-6"

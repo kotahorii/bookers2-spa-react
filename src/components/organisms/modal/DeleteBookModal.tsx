@@ -7,7 +7,7 @@ export const DeleteBookModal = memo(() => {
   const { closeDeleteBookModal, deleteBook } = useMyPage()
   const { detailBook } = useBooks()
   return (
-    <div className="flex flex-col mt-5 space-y-4 w-80">
+    <div className="flex flex-col mt-5 space-y-4 md:w-80 w-72">
       <p>Are you sure delete ?</p>
       <div className="flex flex-row justify-between">
         <div></div>
